@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://rlrki7y6iu78"]
+
+[ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="1_j2mxc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6n2ei"]
+radial_segments = 8
+rings = 2
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3e88i"]
+points = PackedVector3Array(-0.5, -0.5, 0, -0.353563, -0.5, -0.353563, -0.433046, -0.75, 0, -0.353563, -0.5, 0.353465, -0.5, 0.5, 0, 0, -0.5, -0.5, 0, -0.75, -0.433046, -0.306186, -0.75, -0.306186, -0.353563, 0.5, -0.353563, -0.306186, -0.75, 0.306089, -0.176782, -0.933046, -0.176782, -0.25, -0.933046, 0, -0.176782, -0.933046, 0.176684, 0, -0.5, 0.5, -0.353563, 0.5, 0.353465, -0.433046, 0.75, 0, 0.353465, -0.5, -0.353563, 0, 0.5, -0.5, 0.306089, -0.75, -0.306186, 0.176684, -0.933046, -0.176782, 0, -0.933046, -0.25, -0.306186, 0.75, -0.306186, 0, 0.75, -0.433046, 0, -0.75, 0.432948, 0, -1, 0, 0, -0.933046, 0.249902, 0.306089, -0.75, 0.306089, 0.353465, -0.5, 0.353465, 0, 0.5, 0.5, -0.306186, 0.75, 0.306089, -0.176782, 0.93285, 0.176684, -0.25, 0.93285, 0, -0.176782, 0.93285, -0.176782, 0.5, -0.5, 0, 0.353465, 0.5, -0.353563, 0.432948, -0.75, 0, 0.249902, -0.933046, 0, 0, 0.93285, -0.25, 0.176684, 0.93285, -0.176782, 0.306089, 0.75, -0.306186, 0.176684, -0.933046, 0.176684, 0.353465, 0.5, 0.353465, 0.306089, 0.75, 0.306089, 0, 0.75, 0.432948, 0, 0.93285, 0.25, 0, 1, 0, 0.5, 0.5, 0, 0.25, 0.93285, 0, 0.432948, 0.75, 0, 0.176684, 0.93285, 0.176684)
+
+[node name="Player" type="RigidBody3D"]
+lock_rotation = true
+script = ExtResource("1_j2mxc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6n2ei")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_3e88i")
+
+[node name="TwistPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
