@@ -27,6 +27,7 @@ func _ready() -> void:
 	_cone_mesh.create_convex_collision()
 	_area3D.add_child(_cone_collision)
 	_cone_collision.shape = _cone_mesh.get_child(1).get_child(0).shape
+	_area3D.collision_mask = 2
 	
 	_cone_mesh.get_child(1).queue_free()
 	

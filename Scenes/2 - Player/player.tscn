@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://rlrki7y6iu78"]
+[gd_scene load_steps=5 format=3 uid="uid://rlrki7y6iu78"]
 
 [ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="1_j2mxc"]
 
@@ -8,6 +8,12 @@ rings = 2
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3e88i"]
 points = PackedVector3Array(-0.5, -0.5, 0, -0.353563, -0.5, -0.353563, -0.433046, -0.75, 0, -0.353563, -0.5, 0.353465, -0.5, 0.5, 0, 0, -0.5, -0.5, 0, -0.75, -0.433046, -0.306186, -0.75, -0.306186, -0.353563, 0.5, -0.353563, -0.306186, -0.75, 0.306089, -0.176782, -0.933046, -0.176782, -0.25, -0.933046, 0, -0.176782, -0.933046, 0.176684, 0, -0.5, 0.5, -0.353563, 0.5, 0.353465, -0.433046, 0.75, 0, 0.353465, -0.5, -0.353563, 0, 0.5, -0.5, 0.306089, -0.75, -0.306186, 0.176684, -0.933046, -0.176782, 0, -0.933046, -0.25, -0.306186, 0.75, -0.306186, 0, 0.75, -0.433046, 0, -0.75, 0.432948, 0, -1, 0, 0, -0.933046, 0.249902, 0.306089, -0.75, 0.306089, 0.353465, -0.5, 0.353465, 0, 0.5, 0.5, -0.306186, 0.75, 0.306089, -0.176782, 0.93285, 0.176684, -0.25, 0.93285, 0, -0.176782, 0.93285, -0.176782, 0.5, -0.5, 0, 0.353465, 0.5, -0.353563, 0.432948, -0.75, 0, 0.249902, -0.933046, 0, 0, 0.93285, -0.25, 0.176684, 0.93285, -0.176782, 0.306089, 0.75, -0.306186, 0.176684, -0.933046, 0.176684, 0.353465, 0.5, 0.353465, 0.306089, 0.75, 0.306089, 0, 0.75, 0.432948, 0, 0.93285, 0.25, 0, 1, 0, 0.5, 0.5, 0, 0.25, 0.93285, 0, 0.432948, 0.75, 0, 0.176684, 0.93285, 0.176684)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mpeai"]
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 2
 
 [node name="Player" type="RigidBody3D"]
 lock_rotation = true
@@ -29,3 +35,14 @@ transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 
 
 [node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+
+[node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/Camera3D"]
+target_position = Vector3(0, 0, -50)
+collision_mask = 15
+debug_shape_thickness = 5
+
+[node name="HoldingPoint" type="Node3D" parent="TwistPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 1, 0.25, -0.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TwistPivot/HoldingPoint"]
+mesh = SubResource("SphereMesh_mpeai")
