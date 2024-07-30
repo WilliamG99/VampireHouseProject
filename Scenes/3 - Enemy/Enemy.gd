@@ -3,7 +3,7 @@ extends RigidBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var player = $"../Player"
 
-const SPEED = 2000
+const SPEED = 2250.0
 
 func _physics_process(delta):
 	var current_location = global_transform.origin

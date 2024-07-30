@@ -19,7 +19,7 @@ collision_layer = 2
 collision_mask = 15
 lock_rotation = true
 continuous_cd = true
-linear_damp = 1.25
+linear_damp = 1.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

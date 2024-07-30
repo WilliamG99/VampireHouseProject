@@ -49,10 +49,12 @@ func build_material() -> StandardMaterial3D:
 	var grad = Gradient.new()
 	grad.set_color(0, Color(light_color, opacity))
 	grad.set_color(1, Color(light_color, 0.0))
+	
 	var grad_tex = GradientTexture2D.new()
 	grad_tex.gradient = grad
 	grad_tex.fill_from = Vector2(0.0, 0.0)
 	grad_tex.fill_to = Vector2(0.0, 0.5 * falloff)
+	print("light_color", falloff)
 	mat.albedo_texture = grad_tex
 	return mat
 
