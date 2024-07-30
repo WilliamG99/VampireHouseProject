@@ -3,7 +3,7 @@ extends RigidBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var player = $"../Player"
 
-const SPEED = 15
+const SPEED = 2000
 
 func _physics_process(delta):
 	var current_location = global_transform.origin
@@ -14,7 +14,7 @@ func _physics_process(delta):
 	direction.y = 0
 	var new_velocity = direction.normalized() * SPEED * delta
 	
-	apply_central_impulse(new_velocity)
+	apply_central_force(new_velocity)
 
 func update_target_location(target_location):
 	nav_agent.target_position = target_location

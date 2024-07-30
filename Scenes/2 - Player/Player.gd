@@ -1,37 +1,37 @@
 extends RigidBody3D
 
-@onready var twist_pivot := $TwistPivot
-@onready var pitch_pivot := $TwistPivot/PitchPivot
+@onready var mesh = $MeshInstance3D
+@onready var spring_arm_pivot = $SpringArmPivot
+@onready var spring_arm = $SpringArmPivot/SpringArm3D
+@onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
-var mouse_sensitivity := 0.001
-var twist_input := 0.0
-var pitch_input := 0.0
+const SPEED := 2250.0
+const LERP_VAL := 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#aInput.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	raycast.add_exception($".")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		spring_arm_pivot.rotate_y(-event.relative.x * 0.002)
+		spring_arm.rotate_x(-event.relative.y * 0.002)
+		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/4, PI/4)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
-	var input := Vector3.ZERO
-	input.x = Input.get_axis("move_left", "move_right")
-	input.z = Input.get_axis("move_forward","move_backward")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
 	
-	#print("Player Force = ", twist_pivot.basis * input * 1200.0 * delta)
-	apply_central_force(twist_pivot.basis * input * 1200.0 * delta)
+	if direction:
+		apply_central_force(direction * SPEED * delta)
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
-	twist_pivot.rotate_y(twist_input)
-	pitch_pivot.rotate_x(pitch_input)
-	pitch_pivot.rotation.x = clamp(
-		pitch_pivot.rotation.x, -0.5, 0.5)
-	twist_input = 0.0
-	pitch_input = 0.0
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		twist_input = - event.relative.x * mouse_sensitivity
-		pitch_input = - event.relative.y * mouse_sensitivity
+

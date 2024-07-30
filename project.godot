@@ -58,6 +58,10 @@ throw={
 ]
 }
 
+[physics]
+
+3d/physics_engine="JoltPhysics3D"
+
 [rendering]
 
 anti_aliasing/screen_space_roughness_limiter/enabled=false

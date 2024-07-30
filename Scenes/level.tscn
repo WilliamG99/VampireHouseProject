@@ -1,10 +1,11 @@
 [gd_scene load_steps=34 format=3 uid="uid://pk2ynjifhvsq"]
 
-[ext_resource type="PackedScene" uid="uid://rlrki7y6iu78" path="res://Scenes/2 - Player/player.tscn" id="1_a7xgs"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_m04te"]
 [ext_resource type="PackedScene" uid="uid://c3xc2rpefbid3" path="res://Scenes/4 - Props/frying_pan.tscn" id="2_00qmg"]
 [ext_resource type="PackedScene" uid="uid://go40bp5q8md6" path="res://Scenes/1 - LightObjects/light_source.tscn" id="3_63o1u"]
 [ext_resource type="PackedScene" uid="uid://yw2b72uisaoi" path="res://Scenes/1 - LightObjects/light_switch.tscn" id="3_tcnd7"]
+[ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="3_xavtf"]
+[ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="4_5yyyf"]
 [ext_resource type="PackedScene" uid="uid://drqgscf3l2qpr" path="res://Scenes/3 - Enemy/enemy.tscn" id="4_nbcbk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shhn6"]
@@ -29,11 +30,8 @@ adjustment_brightness = 0.9
 adjustment_contrast = 1.5
 adjustment_saturation = 1.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ulhr6"]
-size = Vector3(2, 0.5, 3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4cq61"]
-size = Vector3(4, 1.5, 5)
+[sub_resource type="SphereShape3D" id="SphereShape3D_ya4km"]
+radius = 3.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_kxg6f"]
 top_radius = 0.2
@@ -105,7 +103,7 @@ size = Vector2(100, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42a8f"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pwqcp"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ldvrt"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
 
 [node name="main" type="Node3D"]
@@ -119,36 +117,29 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 visible = false
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_a7xgs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.748001, 0, 42.472)
-collision_layer = 2
-collision_mask = 15
+[node name="FryingPan" parent="." instance=ExtResource("2_00qmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 37)
 mass = 0.5
+continuous_cd = true
+
+[node name="Area3D2" type="Area3D" parent="FryingPan"]
+collision_layer = 8
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FryingPan/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("SphereShape3D_ya4km")
+
+[node name="Player" parent="." instance=ExtResource("3_xavtf")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 46)
+script = ExtResource("4_5yyyf")
 
 [node name="Enemy" parent="." instance=ExtResource("4_nbcbk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 35)
 collision_layer = 4
 collision_mask = 15
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
-
-[node name="FryingPan" parent="." instance=ExtResource("2_00qmg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9304, 1, 39.4729)
-collision_layer = 8
-collision_mask = 15
-freeze_mode = 1
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FryingPan"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9)
-shape = SubResource("BoxShape3D_ulhr6")
-
-[node name="Area3D" type="Area3D" parent="FryingPan"]
-collision_layer = 8
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FryingPan/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-shape = SubResource("BoxShape3D_4cq61")
 
 [node name="Lamp Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 19)
@@ -292,9 +283,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_42a8f")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/House/MeshInstance3D12"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/House/MeshInstance3D12/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_pwqcp")
+shape = SubResource("ConcavePolygonShape3D_ldvrt")
 
-[connection signal="body_entered" from="FryingPan/Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="FryingPan/Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="FryingPan/Area3D2" to="." method="_on_area_3d_2_body_entered"]
+[connection signal="body_exited" from="FryingPan/Area3D2" to="." method="_on_area_3d_2_body_exited"]
 [connection signal="body_entered" from="Light Switch" to="." method="_on_light_switch_body_entered"]
 [connection signal="body_entered" from="Light Switch2" to="." method="_on_light_switch_2_body_entered"]
