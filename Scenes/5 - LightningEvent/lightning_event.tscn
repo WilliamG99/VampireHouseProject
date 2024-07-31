@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://rgn7700qf548"]
+[gd_scene load_steps=10 format=3 uid="uid://rgn7700qf548"]
 
-[ext_resource type="Script" path="res://Scenes/5 - LightningEvent/LightningBox.gd" id="1_ft0e8"]
+[ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="1_ejgwo"]
+[ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="2_8cjjt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swnu1"]
+albedo_color = Color(0.875997, 0.642853, 0.822816, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ki8q3"]
+material = SubResource("StandardMaterial3D_swnu1")
 size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ry3xa"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_j31ju"]
 size = Vector3(6, 2, 1)
@@ -11,23 +19,30 @@ size = Vector3(6, 2, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_6o1no"]
 size = Vector3(3, 6, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ife5h"]
-size = Vector3(3, 3, 20)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akcjl"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_de6f2"]
+material = SubResource("StandardMaterial3D_akcjl")
+size = Vector3(3, 2.75, 20)
 
 [node name="LightningEvent" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ejgwo")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0.364299, -8)
+script = ExtResource("2_8cjjt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.25, 0.433013, -0.5, 0.433013, 0.75, 0, -0.866025, 0.5, 0, 9, 0)
+light_energy = 0.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ki8q3")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 7.4526, 13)
-light_energy = 2.0
-light_specular = 1.0
-shadow_enabled = true
-spot_range = 40.0
-spot_attenuation = 1e-05
-spot_angle = 15.0
-spot_angle_attenuation = 1e-05
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ry3xa")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 7)
@@ -57,10 +72,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01499, 0, 4.27964)
 [node name="Node3D4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01287, 0, 4.27964)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.86388e-15, 8.74228e-08, 4.37114e-08, 0.866025, 0.5, -7.57103e-08, 0.5, -0.866025, 0, 8, -8)
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 6.49531, 13)
+light_energy = 2.0
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_reverse_cull_face = true
+shadow_blur = 0.0
+spot_range = 40.0
+spot_attenuation = 1e-05
+spot_angle = 15.0
+spot_angle_attenuation = 1e-05
 
-[node name="LightningBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 3, 7)
-mesh = SubResource("BoxMesh_ife5h")
-script = ExtResource("1_ft0e8")
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 7)
+transparency = 0.5
+cast_shadow = 2
+mesh = SubResource("BoxMesh_de6f2")
