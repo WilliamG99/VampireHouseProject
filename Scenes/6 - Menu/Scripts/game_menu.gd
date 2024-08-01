@@ -18,4 +18,5 @@ func _on_button_resume_pressed():
 func _on_button_return_pressed():
 	print("game_menu.gd::20::RETURN_BUTTON_PRESSED")
 	print("Returning to title screen.")
+	# Return to title scene
 	get_tree().change_scene_to_file("res://Scenes/6 - Menu/Scenes/start_menu.tscn")
