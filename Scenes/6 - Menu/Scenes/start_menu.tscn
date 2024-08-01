@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxvwja2ivdnaj"]
+
+[ext_resource type="Script" path="res://Scenes/6 - Menu/Scripts/start_menu.gd" id="1_5r1uq"]
+[ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_a8ds3"]
+[ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_831s3"]
+[ext_resource type="AudioStream" uid="uid://tit5ly7w62g5" path="res://Assets/Audio/Music/Start Menu Theme.mp3" id="3_g11qw"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_a8ds3")
+script = ExtResource("1_5r1uq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Padding" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Line Break" type="Control" parent="Padding/VerticalAllignment"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Padding/VerticalAllignment"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_831s3")
+theme_override_font_sizes/font_size = 120
+text = "Vampire House"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HorizontalAlligment" type="HBoxContainer" parent="Padding"]
+layout_mode = 2
+alignment = 1
+
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/HorizontalAlligment"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ButtonStart" type="Button" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_831s3")
+theme_override_font_sizes/font_size = 82
+text = "Start
+"
+flat = true
+
+[node name="ButtonQuit" type="Button" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_831s3")
+theme_override_font_sizes/font_size = 82
+text = "Exit
+"
+flat = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g11qw")
+autoplay = true
+
+[connection signal="button_down" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_button_down"]
+[connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="button_down" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_button_down"]
+[connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

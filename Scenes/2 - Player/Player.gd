@@ -10,8 +10,6 @@ const LERP_VAL := 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#aInput.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	raycast.add_exception($".")
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,9 +27,6 @@ func _process(delta) -> void:
 	if direction:
 		apply_central_force(direction * SPEED * delta)
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://pk2ynjifhvsq"]
+[gd_scene load_steps=35 format=3 uid="uid://pk2ynjifhvsq"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_m04te"]
 [ext_resource type="PackedScene" uid="uid://c3xc2rpefbid3" path="res://Scenes/4 - Props/frying_pan.tscn" id="2_00qmg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="3_xavtf"]
 [ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="4_5yyyf"]
 [ext_resource type="PackedScene" uid="uid://drqgscf3l2qpr" path="res://Scenes/3 - Enemy/enemy.tscn" id="4_nbcbk"]
+[ext_resource type="PackedScene" uid="uid://2kd8qk0mkmpb" path="res://Scenes/6 - Menu/Scenes/game_menu.tscn" id="8_gomiy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shhn6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -285,7 +286,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_42a8f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/House/MeshInstance3D12/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ldvrt")
 
+[node name="UI" type="Node" parent="."]
+
+[node name="GameMenu" parent="UI" instance=ExtResource("8_gomiy")]
+
 [connection signal="body_entered" from="FryingPan/Area3D2" to="." method="_on_area_3d_2_body_entered"]
 [connection signal="body_exited" from="FryingPan/Area3D2" to="." method="_on_area_3d_2_body_exited"]
 [connection signal="body_entered" from="Light Switch" to="." method="_on_light_switch_body_entered"]
 [connection signal="body_entered" from="Light Switch2" to="." method="_on_light_switch_2_body_entered"]
+[connection signal="resume" from="UI/GameMenu" to="." method="_on_game_menu_resume"]

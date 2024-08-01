@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://brnraesdacowk"]
+
+[ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="1_bv0yi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_366gy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2o3g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0y2q6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayy52"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osm2t"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.658824, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.658824, 0, 0, 1)
+Button/fonts/font = ExtResource("1_bv0yi")
+Button/styles/disabled = SubResource("StyleBoxEmpty_366gy")
+Button/styles/focus = SubResource("StyleBoxEmpty_g2o3g")
+Button/styles/hover = SubResource("StyleBoxEmpty_0y2q6")
+Button/styles/normal = SubResource("StyleBoxEmpty_ayy52")
+Button/styles/pressed = SubResource("StyleBoxEmpty_osm2t")
