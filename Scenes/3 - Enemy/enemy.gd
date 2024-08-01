@@ -1,9 +1,13 @@
 extends RigidBody3D
 
+
 @onready var nav_agent = $NavigationAgent3D
 @onready var player = $"../Player"
 
+
 const SPEED = 2250.0
+const DESIRED_LIGHT_STATE := true
+
 
 func _physics_process(delta):
 	var current_location = global_transform.origin
@@ -18,3 +22,7 @@ func _physics_process(delta):
 
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
+
+
+func get_desired_light_state() -> bool:
+	return DESIRED_LIGHT_STATE

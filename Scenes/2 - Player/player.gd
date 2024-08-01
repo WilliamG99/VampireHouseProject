@@ -1,18 +1,25 @@
 extends RigidBody3D
 
-@onready var mesh = $MeshInstance3D
+@onready var mesh = $PlayerMesh
+@onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
 @onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 const SPEED := 2250.0
 const LERP_VAL := 0.5
+const DESIRED_LIGHT_STATE := false
+
+var near_prop := false
+var holding_prop := false
+var prop_node : RigidBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#aInput.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	raycast.add_exception($".")
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -21,7 +28,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/4, PI/4)
 
 
-func _process(delta) -> void:
+func get_desired_light_state() -> bool:
+	return DESIRED_LIGHT_STATE
+
+
+func _physics_process(delta) -> void:
+	# Player Movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
@@ -30,8 +42,42 @@ func _process(delta) -> void:
 		apply_central_force(direction * SPEED * delta)
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 	
+	# Game Mouse Mode
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	# Prop Interaction
+	if near_prop and Input.is_action_just_pressed("interact"):
+		holding_prop = true
+	
+	if holding_prop == true:
+		var prop_interact = Prop_Interact.new()
 		
+		prop_interact.is_near = near_prop
+		prop_interact.is_holding = holding_prop
+		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
+		prop_interact.prop_position = hand.global_position
+		
+		prop_node.pick_up(prop_interact)
+
+		if Input.is_action_just_pressed("throw"):
+			holding_prop = false
+			
+			prop_node.throw(prop_interact)
+
+# Prop Interaction Collison Signals
+func _on_prop_interact_area_body_entered(body):
+	if body.has_method("pick_up"):
+		near_prop = true
+		prop_node = body
+
+func _on_prop_interact_area_body_exited(body):
+	if body.has_method("pick_up"):
+		near_prop = false
+		prop_node = null
+
+
+
+
 
 

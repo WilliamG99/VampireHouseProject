@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://go40bp5q8md6"]
 
-[ext_resource type="Script" path="res://Scenes/1 - LightObjects/SpotLight3D.gd" id="1_cwhbx"]
+[ext_resource type="Script" path="res://Scenes/1 - LightObjects/light_source_effect.gd" id="1_7hnu1"]
 
-[node name="SpotLight3D" type="SpotLight3D"]
+[node name="LightSource" type="SpotLight3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 5, 0)
 light_color = Color(1, 1, 0, 1)
 shadow_enabled = true
 spot_range = 6.0
 spot_attenuation = 1.04219e-05
 spot_angle = 20.0
 spot_angle_attenuation = 1e-05
-script = ExtResource("1_cwhbx")
+script = ExtResource("1_7hnu1")
