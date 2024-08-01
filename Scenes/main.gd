@@ -17,6 +17,8 @@ var holding_pan := false
 var is_game_paused := false
 
 func _ready():
+	# Make sure the game is unpaused
+	Engine.time_scale = 1
 	# Hide the game menu and the cursor at the start of the scene
 	game_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
