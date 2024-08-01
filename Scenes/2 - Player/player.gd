@@ -1,10 +1,10 @@
 extends RigidBody3D
 
+
 @onready var mesh = $PlayerMesh
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
-@onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 const SPEED := 2250.0
 const LERP_VAL := 0.5
@@ -14,13 +14,13 @@ var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
 
-# Called when the node enters the scene tree for the first time.
+var prop_interact = Prop_Interact.new()
+
+
 func _ready() -> void:
-	#aInput.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	raycast.add_exception($".")
 
-
+# Camera Movements with Mouse
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		spring_arm_pivot.rotate_y(-event.relative.x * 0.002)
@@ -47,37 +47,29 @@ func _physics_process(delta) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	# Prop Interaction
-	if near_prop and Input.is_action_just_pressed("interact"):
+	if near_prop and !holding_prop and Input.is_action_just_pressed("interact"):
 		holding_prop = true
 	
-	if holding_prop == true:
-		var prop_interact = Prop_Interact.new()
-		
+	if holding_prop:
 		prop_interact.is_near = near_prop
 		prop_interact.is_holding = holding_prop
 		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
 		prop_interact.prop_position = hand.global_position
 		
 		prop_node.pick_up(prop_interact)
-
+		
 		if Input.is_action_just_pressed("throw"):
 			holding_prop = false
 			
-			prop_node.throw(prop_interact)
+			prop_node.throw()
 
 # Prop Interaction Collison Signals
-func _on_prop_interact_area_body_entered(body):
+func _on_prop_interact_area_body_entered(body) -> void:
 	if body.has_method("pick_up"):
 		near_prop = true
 		prop_node = body
 
-func _on_prop_interact_area_body_exited(body):
+func _on_prop_interact_area_body_exited(body) -> void:
 	if body.has_method("pick_up"):
 		near_prop = false
 		prop_node = null
-
-
-
-
-
-

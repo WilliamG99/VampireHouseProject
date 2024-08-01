@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://drqgscf3l2qpr"]
+[gd_scene load_steps=6 format=3 uid="uid://drqgscf3l2qpr"]
 
 [ext_resource type="Script" path="res://Scenes/3 - Enemy/enemy.gd" id="1_el7qd"]
 
@@ -8,19 +8,55 @@ height = 5.0
 radial_segments = 8
 rings = 2
 
+[sub_resource type="SphereMesh" id="SphereMesh_22tv7"]
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 2
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3jtv2"]
 points = PackedVector3Array(-1, -1.5001, 0, -0.707126, -1.5001, -0.707126, -0.866092, -2.00029, 0, -0.707126, -1.5001, 0.70693, -1, 1.49961, 0, 0, -1.5001, -1, 0, -2.00029, -0.866092, -0.612373, -2.00029, -0.612373, -0.707126, 1.49961, -0.707126, -0.612373, -2.00029, 0.612177, -0.353563, -2.36639, -0.353563, -0.5, -2.36639, 0, -0.353563, -2.36639, 0.353367, 0, -1.5001, 1, -0.707126, 1.49961, 0.70693, -0.866092, 1.9998, 0, 0.70693, -1.5001, -0.707126, 0, 1.49961, -1, 0.612177, -2.00029, -0.612373, 0.353367, -2.36639, -0.353563, 0, -2.36639, -0.5, -0.612373, 1.9998, -0.612373, 0, 1.9998, -0.866092, 0, -2.00029, 0.865897, 0, -2.5, 0, 0, -2.36639, 0.499804, 0.612177, -2.00029, 0.612177, 0.70693, -1.5001, 0.70693, 0, 1.49961, 1, -0.612373, 1.9998, 0.612177, -0.353563, 2.3659, 0.353367, -0.5, 2.3659, 0, -0.353563, 2.3659, -0.353563, 1, -1.5001, 0, 0.70693, 1.49961, -0.707126, 0.865897, -2.00029, 0, 0.499804, -2.36639, 0, 0, 2.3659, -0.5, 0.353367, 2.3659, -0.353563, 0.612177, 1.9998, -0.612373, 0.353367, -2.36639, 0.353367, 0.70693, 1.49961, 0.70693, 0.612177, 1.9998, 0.612177, 0, 1.9998, 0.865897, 0, 2.3659, 0.5, 0, 2.5, 0, 1, 1.49961, 0, 0.5, 2.3659, 0, 0.865897, 1.9998, 0, 0.353367, 2.3659, 0.353367)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1410m"]
+radius = 4.0
+
 [node name="Enemy" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 15
 mass = 1.25
 lock_rotation = true
 linear_damp = 1.0
 script = ExtResource("1_el7qd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="EnemyMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 mesh = SubResource("CapsuleMesh_u6gas")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="EnemyHand" type="Node3D" parent="EnemyMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59114, 0.25, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyMesh/EnemyHand"]
+mesh = SubResource("SphereMesh_22tv7")
+
+[node name="EnemyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("ConvexPolygonShape3D_3jtv2")
+
+[node name="PropInteractArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
+shape = SubResource("SphereShape3D_1410m")
+
+[node name="ThrowTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="PickUpTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
+[connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]
+[connection signal="timeout" from="ThrowTimer" to="." method="_on_throw_timer_timeout"]
+[connection signal="timeout" from="PickUpTimer" to="." method="_on_pick_up_timer_timeout"]

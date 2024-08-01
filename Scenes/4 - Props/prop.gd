@@ -6,5 +6,5 @@ func pick_up(prop_interact: Prop_Interact):
 	global_position = prop_interact.prop_position
 	collision_mask = 13
 
-func throw(prop_interact: Prop_Interact):
+func throw():
 	apply_central_impulse(Vector3(0,20,0))
