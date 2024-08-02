@@ -7,6 +7,7 @@ extends RigidBody3D
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
 @onready var aim_raycast = $AimRaycast
 
+
 const SPEED := 2250.0
 const LERP_VAL := 0.5
 const DESIRED_LIGHT_STATE := false
@@ -17,7 +18,6 @@ var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
 var aim_dir : Vector3
-
 
 var prop_interact = Prop_Interact.new()
 

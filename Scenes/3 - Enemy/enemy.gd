@@ -8,17 +8,25 @@ extends RigidBody3D
 @onready var pick_up_timer = $PickUpTimer
 
 
-const SPEED = 0.0
-const LERP_VAL := 0.05
+const SPEED = 1500.0
+const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
+const AIM_DIR_Y := Vector3(0,15,0)
+const THROW_SPEED := 2750
 
 var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
+var aim_dir : Vector3
+var target_location : Vector3
+var prop_interact = Prop_Interact.new()
+
 var throw_timer_on := false
 var pick_up_timer_on := false
 
-var prop_interact = Prop_Interact.new()
+var current_location := global_transform.origin
+var next_location : Vector3
+var direction : Vector3
 
 
 func get_desired_light_state() -> bool:
@@ -26,41 +34,49 @@ func get_desired_light_state() -> bool:
 
 
 func update_target_location(target_location) -> void:
+	self.target_location = target_location
+	print(self.target_location)
 	nav_agent.target_position = target_location
 
 
-#func _physics_process(delta) -> void:
-	#var current_location = global_transform.origin
-	##print("Loc", current_location)
-	#var next_location = nav_agent.get_next_path_position()
-	##print("Next", next_location)
-	#var direction = (next_location - current_location)
-	#direction.y = 0
-	#var new_velocity = direction.normalized() * SPEED * delta
-	#
-	#apply_central_force(new_velocity)
+func _physics_process(delta) -> void:
+	current_location = global_transform.origin
+	next_location = nav_agent.get_next_path_position()
+	direction = (next_location - current_location).normalized()
+	direction.y = 0
+	
+	rotation.y = lerp_angle(rotation.y, (atan2(-direction.x, -direction.z)), LERP_VAL)
 	#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
-	#
-	## Prop Interaction
-	## enemy has two timers, one for next prop pickup time and other for time till throw after pickup
-	#if near_prop and !holding_prop and !pick_up_timer_on:
-		#holding_prop = true
-		#throw_timer_on = true
-		#throw_timer.start()
-	#
-	#if holding_prop:
-		#prop_interact.is_near = near_prop
-		#prop_interact.is_holding = holding_prop
-		#prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
-		#prop_interact.prop_position = hand.global_position
-		#
-		#prop_node.pick_up(prop_interact)
-		#
-		#if !throw_timer_on:
-			#holding_prop = false
-			#pick_up_timer_on = true
-			#pick_up_timer.start()
-			#prop_node.throw(prop_interact)
+	
+	apply_central_force(direction * SPEED * delta)
+	
+	# Prop Interaction
+	# enemy has two timers, one for next prop pickup time and other for time till throw after pickup
+	if near_prop and !holding_prop and !pick_up_timer_on:
+		holding_prop = true
+		throw_timer_on = true
+		throw_timer.start()
+	
+	if holding_prop:
+		prop_interact.is_near = near_prop
+		prop_interact.is_holding = holding_prop
+		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
+		prop_interact.prop_position = hand.global_position
+		prop_interact.target_location = target_location
+		
+		prop_node.pick_up(prop_interact)
+		
+		if !throw_timer_on:
+			holding_prop = false
+			pick_up_timer_on = true
+			pick_up_timer.start()
+			
+			aim_dir = -mesh.global_transform.basis.z
+			prop_interact.prop_aim_direction = aim_dir
+			prop_interact.prop_aim_direction_y = AIM_DIR_Y
+			prop_interact.prop_throw_speed = THROW_SPEED * delta
+			
+			prop_node.throw(prop_interact)
 
 
 # Prop Interaction Collison Signals

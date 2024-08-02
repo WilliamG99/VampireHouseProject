@@ -115,10 +115,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
 
 [node name="Prop" parent="." instance=ExtResource("2_hptie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 37)
 
 [node name="Player" parent="." instance=ExtResource("3_7wsrg")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 44)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 4, 0, 35)
 
 [node name="Enemy" parent="." instance=ExtResource("4_134o1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 35)
