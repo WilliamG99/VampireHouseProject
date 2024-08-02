@@ -5,6 +5,7 @@ extends RigidBody3D
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
+@onready var aim_raycast = $AimRaycast
 
 const SPEED := 2250.0
 const LERP_VAL := 0.5
@@ -13,6 +14,7 @@ const DESIRED_LIGHT_STATE := false
 var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
+var aim_prop_dir : Vector3
 
 var prop_interact = Prop_Interact.new()
 
@@ -37,10 +39,15 @@ func _physics_process(delta) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
+	rotation.y = spring_arm_pivot.rotation.y
+	mesh.rotation.y = spring_arm_pivot.rotation.y
+	
+	aim_prop_dir = -global_transform.basis.z
+	prop_interact.prop_aim_direction = aim_prop_dir
 	
 	if direction:
 		apply_central_force(direction * SPEED * delta)
-		mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
+		#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 	
 	# Game Mouse Mode
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -61,7 +68,7 @@ func _physics_process(delta) -> void:
 		if Input.is_action_just_pressed("throw"):
 			holding_prop = false
 			
-			prop_node.throw()
+			prop_node.throw(prop_interact)
 
 # Prop Interaction Collison Signals
 func _on_prop_interact_area_body_entered(body) -> void:

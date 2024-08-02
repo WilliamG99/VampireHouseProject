@@ -32,33 +32,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_6n2ei")
 
 [node name="PlayerHand" type="Node3D" parent="PlayerMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1.5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerMesh/PlayerHand"]
 mesh = SubResource("SphereMesh_8uogg")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_3e88i")
 
 [node name="SpringArmPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
-spring_length = 7.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+spring_length = 3.5
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871558, 0, -0.0871558, 0.996195, 0, 0, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="SpringArmPivot/SpringArm3D/Camera3D"]
-target_position = Vector3(0, 0, -500)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
 
 [node name="PropInteractArea" type="Area3D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
 shape = SubResource("SphereShape3D_x4iea")
+
+[node name="AimRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+target_position = Vector3(0, 0, -5)
+collision_mask = 0
+hit_back_faces = false
+collide_with_bodies = false
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]
