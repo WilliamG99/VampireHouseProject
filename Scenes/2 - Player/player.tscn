@@ -32,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_6n2ei")
 
 [node name="PlayerHand" type="Node3D" parent="PlayerMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerMesh/PlayerHand"]
 mesh = SubResource("SphereMesh_8uogg")
@@ -54,19 +54,11 @@ spring_length = 3.5
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
 
 [node name="PropInteractArea" type="Area3D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
 shape = SubResource("SphereShape3D_x4iea")
-
-[node name="AimRaycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-target_position = Vector3(0, 0, -5)
-collision_mask = 0
-hit_back_faces = false
-collide_with_bodies = false
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]

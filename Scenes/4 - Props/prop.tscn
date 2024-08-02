@@ -106,12 +106,12 @@ points = PackedVector3Array(-0.0118792, -0.0205734, 0.000912509, -0.0116211, -0.
 collision_layer = 8
 collision_mask = 15
 sleeping = true
+continuous_cd = true
 script = ExtResource("1_qsp88")
 
 [node name="Pan" type="MeshInstance3D" parent="."]
 transform = Transform3D(72.5211, 0, 0, 0, -3.17e-06, 72.5211, 0, -72.5211, -3.17e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_igb8a")
-skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(72.5211, 0, 0, 0, -3.17e-06, 72.5211, 0, -72.5211, -3.17e-06, 0, 0, 0)
