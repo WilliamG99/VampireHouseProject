@@ -8,3 +8,4 @@ var prop_position : Vector3
 var prop_aim_direction : Vector3
 var prop_aim_direction_y : Vector3
 var prop_throw_speed : int
+var target_location : Vector3
