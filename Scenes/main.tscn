@@ -249,3 +249,9 @@ shape = SubResource("ConcavePolygonShape3D_ldvrt")
 [node name="UI" type="Node" parent="."]
 
 [node name="GameMenu" parent="UI" instance=ExtResource("6_1pcgh")]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+
+[connection signal="resume" from="UI/GameMenu" to="." method="_on_game_menu_resume"]

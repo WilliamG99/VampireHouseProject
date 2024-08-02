@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhpj4bcxbf7t5"]
+[gd_scene load_steps=7 format=3 uid="uid://bhpj4bcxbf7t5"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_a8ds3"]
 [ext_resource type="Script" path="res://Scenes/6 - Menu/Scripts/start_menu.gd" id="2_vtxti"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="3_3dc5p"]
 [ext_resource type="AudioStream" uid="uid://tit5ly7w62g5" path="res://Assets/Audio/Music/Start Menu Theme.mp3" id="4_j86rs"]
+[ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="5_6gohf"]
+[ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="6_l5yxv"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_a8ds3")
@@ -83,10 +87,30 @@ text = "Quit
 "
 flat = true
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_j86rs")
-autoplay = true
+[node name="Audio" type="Node" parent="."]
 
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_j86rs")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+
+[node name="Click" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_6gohf")
+volume_db = 5.843
+pitch_scale = 1.01
+bus = &"SFX"
+
+[node name="Select" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_l5yxv")
+volume_db = -11.9
+pitch_scale = 1.32
+bus = &"SFX"
+
+[connection signal="focus_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_focus_entered"]
+[connection signal="mouse_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_mouse_entered"]
 [connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="mouse_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_mouse_entered"]
 [connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_pressed"]
-[connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="finished" from="Audio/Music" to="." method="_on_music_finished"]
+[connection signal="finished" from="Audio/Click" to="." method="_on_click_finished"]
