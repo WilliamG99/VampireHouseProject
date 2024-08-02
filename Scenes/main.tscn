@@ -246,11 +246,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_42a8f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/House/MeshInstance3D12/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ldvrt")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UI" type="Node" parent="."]
 
 [node name="GameMenu" parent="UI" instance=ExtResource("6_1pcgh")]
-layout_mode = 1
