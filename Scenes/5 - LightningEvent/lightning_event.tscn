@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="1_ejgwo"]
 [ext_resource type="Script" path="res://Scenes/5 - LightningEvent/LightningEvent.gd" id="1_oe2c5"]
-[ext_resource type="Script" path="res://Scenes/2 - Player/Player.gd" id="2_8cjjt"]
+[ext_resource type="Script" path="res://Scenes/2 - Player/player.gd" id="2_8cjjt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j31ju"]
 size = Vector3(6, 2, 1)
@@ -75,7 +75,6 @@ script = ExtResource("2_8cjjt")
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 7)
 
 [node name="LightningBoxArea" type="Area3D" parent="LightningEffect"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 2
 

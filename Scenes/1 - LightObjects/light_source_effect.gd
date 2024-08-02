@@ -36,10 +36,6 @@ func _ready() -> void:
 func _on_body_entered(body):
 	print(body.name)
 	print("is inside the light!")
-	
-	if (body.name == "Player"):
-		print("Is player")
-		
 
 func build_material() -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()
@@ -54,15 +50,12 @@ func build_material() -> StandardMaterial3D:
 	grad_tex.gradient = grad
 	grad_tex.fill_from = Vector2(0.0, 0.0)
 	grad_tex.fill_to = Vector2(0.0, 0.5 * falloff)
-	print("light_color", falloff)
 	mat.albedo_texture = grad_tex
 	return mat
-
 
 func update_position() -> void:
 	_cone_mesh.rotation.x = PI * 0.5
 	_cone_mesh.position.z = length * -0.5
-
 
 func update_cone() -> void:
 	var a = deg_to_rad(spot_angle)
