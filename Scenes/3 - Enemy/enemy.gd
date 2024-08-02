@@ -1,30 +1,32 @@
 extends RigidBody3D
 
 
-@onready var mesh = $EnemyMesh
-@onready var hand = $EnemyMesh/EnemyHand
+@onready var player = $"../Player"
+
+@onready var mesh = $frankenstein
+@onready var hand = $frankenstein/EnemyHand
 @onready var nav_agent = $NavigationAgent3D
 @onready var throw_timer = $ThrowTimer
 @onready var pick_up_timer = $PickUpTimer
 
 
-const SPEED = 1500.0
+const SPEED = 0.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
-const AIM_DIR_Y := Vector3(0,15,0)
-const THROW_SPEED := 2750
+const AIM_DIR_Y := Vector3(0,0,0)
+const THROW_SPEED := 3000
 
 var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
 var aim_dir : Vector3
-var target_location : Vector3
+var player_location : Vector3
 var prop_interact = Prop_Interact.new()
 
 var throw_timer_on := false
 var pick_up_timer_on := false
 
-var current_location := global_transform.origin
+var current_location := global_position
 var next_location : Vector3
 var direction : Vector3
 
@@ -34,12 +36,12 @@ func get_desired_light_state() -> bool:
 
 
 func update_target_location(target_location) -> void:
-	self.target_location = target_location
-	print(self.target_location)
+	player_location = target_location
 	nav_agent.target_position = target_location
 
 
 func _physics_process(delta) -> void:
+	update_target_location(player.global_position)
 	current_location = global_transform.origin
 	next_location = nav_agent.get_next_path_position()
 	direction = (next_location - current_location).normalized()
@@ -62,7 +64,7 @@ func _physics_process(delta) -> void:
 		prop_interact.is_holding = holding_prop
 		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
 		prop_interact.prop_position = hand.global_position
-		prop_interact.target_location = target_location
+		prop_interact.target_location = player_location
 		
 		prop_node.pick_up(prop_interact)
 		
@@ -71,7 +73,7 @@ func _physics_process(delta) -> void:
 			pick_up_timer_on = true
 			pick_up_timer.start()
 			
-			aim_dir = -mesh.global_transform.basis.z
+			aim_dir = mesh.global_transform.basis.z
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = AIM_DIR_Y
 			prop_interact.prop_throw_speed = THROW_SPEED * delta

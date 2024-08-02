@@ -1,12 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://drqgscf3l2qpr"]
 
 [ext_resource type="Script" path="res://Scenes/3 - Enemy/enemy.gd" id="1_el7qd"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_u6gas"]
-radius = 1.0
-height = 5.0
-radial_segments = 8
-rings = 2
+[ext_resource type="PackedScene" uid="uid://bvjet8of5o6sj" path="res://Assets/Models/frankenstein.glb" id="2_fu8h6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_22tv7"]
 radius = 0.2
@@ -28,14 +23,13 @@ lock_rotation = true
 linear_damp = 0.35
 script = ExtResource("1_el7qd")
 
-[node name="EnemyMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-mesh = SubResource("CapsuleMesh_u6gas")
+[node name="frankenstein" parent="." instance=ExtResource("2_fu8h6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="EnemyHand" type="Node3D" parent="EnemyMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+[node name="EnemyHand" type="Node3D" parent="frankenstein"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.74846e-07, 2.5, 2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyMesh/EnemyHand"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="frankenstein/EnemyHand"]
 mesh = SubResource("SphereMesh_22tv7")
 
 [node name="EnemyCollision" type="CollisionShape3D" parent="."]
@@ -55,6 +49,8 @@ one_shot = true
 
 [node name="PickUpTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]

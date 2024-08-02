@@ -1,7 +1,7 @@
 extends Control
 
 # Get music reference
-@onready var music = $Music
+@onready var music = $Audio/Music
 # Get SFX References
 @onready var click = $Audio/Click
 @onready var select = $Audio/Select

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdb016fkvp4c6" path="res://Scenes/4 - Props/prop.tscn" id="2_hptie"]
 [ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="3_7wsrg"]
 [ext_resource type="PackedScene" uid="uid://drqgscf3l2qpr" path="res://Scenes/3 - Enemy/enemy.tscn" id="4_134o1"]
-[ext_resource type="PackedScene" uid="uid://2kd8qk0mkmpb" path="res://Scenes/6 - Menu/Scenes/game_menu.tscn" id="6_1pcgh"]
+[ext_resource type="PackedScene" uid="uid://2kd8qk0mkmpb" path="res://Scenes/7 - Menu/Scenes/game_menu.tscn" id="6_1pcgh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shhn6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -121,9 +121,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 37)
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 4, 0, 35)
 
 [node name="Enemy" parent="." instance=ExtResource("4_134o1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 35)
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 22)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_qqpjr")

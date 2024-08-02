@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bhpj4bcxbf7t5"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_a8ds3"]
-[ext_resource type="Script" path="res://Scenes/6 - Menu/Scripts/start_menu.gd" id="2_vtxti"]
+[ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/start_menu.gd" id="2_vtxti"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="3_3dc5p"]
 [ext_resource type="AudioStream" uid="uid://tit5ly7w62g5" path="res://Assets/Audio/Music/Start Menu Theme.mp3" id="4_j86rs"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="5_6gohf"]

@@ -2,11 +2,8 @@ extends Node3D
 
 # Get node references
 @onready var player = $Player
-@onready var player_mesh = $Player/MeshInstance3D
 @onready var spring_arm_pivot = $Player/SpringArmPivot
-@onready var player_hand = $Player/MeshInstance3D/PlayerHand
 @onready var enemy = $Enemy
-@onready var pan = $FryingPan
 @onready var game_menu = $UI/GameMenu
 
 var near_pan := false
@@ -62,6 +59,3 @@ func gameMenu():
 		Engine.time_scale = 1
 		# Hide the mouse
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _physics_process(delta):
-	enemy.update_target_location(player.global_transform.origin)

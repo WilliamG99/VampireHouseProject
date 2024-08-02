@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cabxqqxie3kr3"
-path="res://.godot/imported/FryingPan.glb-6cd5137878b531dcb12748c638220767.scn"
+uid="uid://bvjet8of5o6sj"
+path="res://.godot/imported/frankenstein.glb-704bd85fb29635d10542322a49511d8c.scn"
 
 [deps]
 
-source_file="res://Assets/FryingPan.glb"
-dest_files=["res://.godot/imported/FryingPan.glb-6cd5137878b531dcb12748c638220767.scn"]
+source_file="res://Assets/Models/frankenstein.glb"
+dest_files=["res://.godot/imported/frankenstein.glb-704bd85fb29635d10542322a49511d8c.scn"]
 
 [params]
 
-nodes/root_type="RigidBody3D"
-nodes/root_name="FryingPan"
+nodes/root_type="Node3D"
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
@@ -29,6 +29,12 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Empty": {
+"import/skip_import": true
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

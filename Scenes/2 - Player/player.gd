@@ -5,13 +5,12 @@ extends RigidBody3D
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
-@onready var aim_raycast = $AimRaycast
 
 
 const SPEED := 2250.0
 const LERP_VAL := 0.5
 const DESIRED_LIGHT_STATE := false
-const AIM_DIR_Y := Vector3(0,15,0)
+const AIM_DIR_Y := Vector3(0,5,0)
 const THROW_SPEED := 3000
 
 var near_prop := false
