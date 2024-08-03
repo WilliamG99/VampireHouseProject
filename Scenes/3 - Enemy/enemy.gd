@@ -8,6 +8,7 @@ extends RigidBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var throw_timer = $ThrowTimer
 @onready var pick_up_timer = $PickUpTimer
+@onready var anim_tree = $frankenstein/AnimationTree
 
 
 const SPEED = 0.0
@@ -51,10 +52,15 @@ func _physics_process(delta) -> void:
 	#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 	
 	apply_central_force(direction * SPEED * delta)
+	if SPEED > 0.0:
+		anim_tree.set("parameters/running/transition_request", "true")
+	#elif SPEED == 0.0:
+		#anim_tree.set("parameters/running/transition_request", "false")
 	
 	# Prop Interaction
 	# enemy has two timers, one for next prop pickup time and other for time till throw after pickup
 	if near_prop and !holding_prop and !pick_up_timer_on:
+		anim_tree.set("parameters/holding/transition_request", "true")
 		holding_prop = true
 		throw_timer_on = true
 		throw_timer.start()
@@ -73,12 +79,18 @@ func _physics_process(delta) -> void:
 			pick_up_timer_on = true
 			pick_up_timer.start()
 			
-			aim_dir = mesh.global_transform.basis.z
+			anim_tree.set("parameters/holding/transition_request", "false")
+			
+			aim_dir = -mesh.global_transform.basis.z
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = AIM_DIR_Y
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
 			
 			prop_node.throw(prop_interact)
+
+
+func frank_hit():
+	anim_tree.set("parameters/is_hit/transition_request", "true")
 
 
 # Prop Interaction Collison Signals
