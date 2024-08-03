@@ -107,12 +107,16 @@ collision_layer = 8
 collision_mask = 15
 sleeping = true
 continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_qsp88")
 
 [node name="Pan" type="MeshInstance3D" parent="."]
 transform = Transform3D(72.5211, 0, 0, 0, -3.17e-06, 72.5211, 0, -72.5211, -3.17e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_igb8a")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="PropCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(72.5211, 0, 0, 0, -3.17e-06, 72.5211, 0, -72.5211, -3.17e-06, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xi5mj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

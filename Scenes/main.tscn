@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://pk2ynjifhvsq"]
+[gd_scene load_steps=32 format=3 uid="uid://pk2ynjifhvsq"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_uehyn"]
 [ext_resource type="PackedScene" uid="uid://dqx0w8ua8eaki" path="res://Scenes/1 - LightObjects/light_node.tscn" id="2_f1ajo"]
 [ext_resource type="PackedScene" uid="uid://cdb016fkvp4c6" path="res://Scenes/4 - Props/prop.tscn" id="2_hptie"]
 [ext_resource type="PackedScene" uid="uid://btdhwtdbt0oas" path="res://Scenes/2 - Player/player.tscn" id="3_7wsrg"]
+[ext_resource type="PackedScene" uid="uid://cegol8japchpk" path="res://Scenes/8 - LockOn/lock_on_node.tscn" id="3_qrxwd"]
 [ext_resource type="PackedScene" uid="uid://drqgscf3l2qpr" path="res://Scenes/3 - Enemy/enemy.tscn" id="4_134o1"]
 [ext_resource type="PackedScene" uid="uid://2kd8qk0mkmpb" path="res://Scenes/7 - Menu/Scenes/game_menu.tscn" id="6_1pcgh"]
 
@@ -111,8 +112,8 @@ shadow_enabled = true
 [node name="LightNode" parent="." instance=ExtResource("2_f1ajo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
 
-[node name="LightNode2" parent="." instance=ExtResource("2_f1ajo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+[node name="LockOnNode" parent="." instance=ExtResource("3_qrxwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 22)
 
 [node name="Prop" parent="." instance=ExtResource("2_hptie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 37)

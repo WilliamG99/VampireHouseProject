@@ -5,9 +5,10 @@ extends RigidBody3D
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
+@onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 
-const SPEED := 2250.0
+var SPEED := 2250.0
 const LERP_VAL := 0.5
 const DESIRED_LIGHT_STATE := false
 const AIM_DIR_Y := Vector3(0,5,0)
@@ -17,6 +18,9 @@ var near_prop := false
 var holding_prop := false
 var prop_node : RigidBody3D
 var aim_dir : Vector3
+
+var lock_on_node
+var locking_on = false
 
 var prop_interact = Prop_Interact.new()
 
@@ -38,6 +42,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Prop Interaction
 	if near_prop and !holding_prop and Input.is_action_just_pressed("interact"):
 		holding_prop = true
+
 
 func get_desired_light_state() -> bool:
 	return DESIRED_LIGHT_STATE
@@ -65,13 +70,49 @@ func _physics_process(delta) -> void:
 		
 		prop_node.pick_up(prop_interact)
 		
-		if Input.is_action_just_pressed("throw"):
+		# Locking On
+		if !locking_on and Input.is_action_just_pressed("aim"):
+			locking_on = true
+			SPEED = 0.0
+			print("locking_on ", locking_on)
+			
+		elif locking_on and Input.is_action_just_released("aim"):
+			locking_on = false
+			SPEED = 2250.0
+			print("locking_on ", locking_on)
+		
+		if Input.is_action_just_pressed("throw") and !locking_on:
 			holding_prop = false
 			aim_dir = -mesh.global_transform.basis.z
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = AIM_DIR_Y
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
 			prop_node.throw(prop_interact)
+		elif Input.is_action_just_pressed("throw") and locking_on:
+			holding_prop = false
+			locking_on = false
+			SPEED = 2250.0
+			aim_dir = (lock_on_node.global_position - global_position).normalized()
+			prop_interact.prop_aim_direction = aim_dir
+			prop_interact.prop_aim_direction_y = Vector3(0,0,0)
+			prop_interact.prop_throw_speed = THROW_SPEED * delta
+			prop_node.throw(prop_interact)
+			
+	if holding_prop and locking_on and raycast.get_collider():
+		lock_on_node = raycast.get_collider().get_parent()
+		print(lock_on_node.name)
+		lock_on_node._is_locked_on()
+	elif holding_prop and (locking_on and !raycast.get_collider() or !locking_on and raycast.get_collider()):
+		if lock_on_node:
+			lock_on_node._is_locked_off()
+			lock_on_node = null
+	elif !holding_prop:
+		if lock_on_node:
+			lock_on_node._is_locked_off()
+			lock_on_node = null
+			locking_on = false
+			SPEED = 2250.0
+
 
 # Prop Interaction Collison Signals
 func _on_prop_interact_area_body_entered(body) -> void:
