@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://btdhwtdbt0oas"]
+[gd_scene load_steps=7 format=3 uid="uid://btdhwtdbt0oas"]
 
 [ext_resource type="Script" path="res://Scenes/2 - Player/player.gd" id="1_3jjk2"]
+[ext_resource type="AudioStream" uid="uid://cpancows1xwqp" path="res://Assets/Audio/SFX/throw.mp3" id="2_7evc4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6n2ei"]
 radial_segments = 8
@@ -69,6 +70,13 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
 shape = SubResource("SphereShape3D_x4iea")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Throw" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_7evc4")
+volume_db = -7.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]

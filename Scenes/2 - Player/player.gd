@@ -5,8 +5,10 @@ extends RigidBody3D
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
-@onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
+@onready var aim_raycast = $AimRaycast
 
+# Get audio references
+@onready var throw = $Audio/Throw
 
 var SPEED := 2250.0
 const LERP_VAL := 0.5
@@ -89,6 +91,7 @@ func _physics_process(delta) -> void:
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = AIM_DIR_Y
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
+			throw.play()
 			prop_node.throw(prop_interact)
 		elif Input.is_action_just_pressed("throw") and locking_on:
 			holding_prop = false
