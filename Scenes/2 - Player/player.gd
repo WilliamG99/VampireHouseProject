@@ -11,8 +11,10 @@ extends RigidBody3D
 var SPEED := 2250.0
 const LERP_VAL := 0.5
 const DESIRED_LIGHT_STATE := false
-const AIM_DIR_Y := Vector3(0,5,0)
+const AIM_DIR_Y := Vector3(0,0,0)
 const THROW_SPEED := 3000
+
+var direction : Vector3
 
 var near_prop := false
 var holding_prop := false
@@ -51,7 +53,7 @@ func get_desired_light_state() -> bool:
 func _physics_process(delta) -> void:
 	# Player Movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
 	rotation.y = spring_arm_pivot.rotation.y
 	mesh.rotation.y = spring_arm_pivot.rotation.y
@@ -124,3 +126,34 @@ func _on_prop_interact_area_body_exited(body) -> void:
 	if body.has_method("pick_up"):
 		near_prop = false
 		prop_node = null
+
+
+func game_over():
+	print("GAME OVER")
+	
+# Enemy Collision
+func _on_body_entered(body):
+	if body.name == "Enemy":
+		game_over()
+
+
+func in_light():
+	print("Inlight")
+	SPEED = 625
+
+func out_light():
+	print("Out of light")
+	SPEED = 2250.0
+
+func in_lightning():
+	SPEED = 0.0
+	freeze = true
+
+func out_lightning():
+	SPEED = 2250.0
+	freeze = false
+
+
+# Bedroom Reached - Game Won
+func bedroom_reached():
+	print("GAME END")

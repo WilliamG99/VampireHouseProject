@@ -22,8 +22,11 @@ radius = 3.0
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 15
+mass = 0.8
 lock_rotation = true
 continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 linear_damp = 1.5
 script = ExtResource("1_3jjk2")
 
@@ -62,6 +65,7 @@ debug_shape_thickness = 5
 [node name="PropInteractArea" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
 shape = SubResource("SphereShape3D_x4iea")

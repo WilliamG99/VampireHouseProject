@@ -1,6 +1,7 @@
 extends SpotLight3D
 
-@export var length: float = 6.0
+@export var length: float = 10
+@export var angle: float = 25
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
 @export_range(0.0, 1.0, 0.01) var opacity: float = 0.2
 
@@ -11,6 +12,16 @@ var _cone_collision : CollisionShape3D = null
 
 
 func _ready() -> void:
+	
+	length = $"..".get_length()
+	angle = $"..".get_angle()
+	print(angle)
+	falloff = $"..".get_falloff()
+	opacity = $"..".get_opacity()
+	
+	spot_range = length
+	spot_angle = angle
+	
 	_cone_mesh = MeshInstance3D.new()
 	_area3D = Area3D.new()
 	_cone_collision = CollisionShape3D.new()
@@ -32,10 +43,15 @@ func _ready() -> void:
 	_cone_mesh.get_child(1).queue_free()
 	
 	self._area3D.body_entered.connect(_on_body_entered)
+	self._area3D.body_exited.connect(_on_body_exited)
 	
 func _on_body_entered(body):
-	print(body.name)
-	print("is inside the light!")
+	if body.has_method("in_light"):
+		body.in_light()
+
+func _on_body_exited(body):
+	if body.has_method("out_light"):
+		body.out_light()
 
 func build_material() -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()

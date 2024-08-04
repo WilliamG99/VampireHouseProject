@@ -30,5 +30,11 @@ func _on_lightning_length_timer_timeout():
 
 
 func _on_lightning_box_area_body_entered(body):
-	if body == $Player:
-		print(body.name, " detected")
+	if body.has_method("in_lightning"):
+		print("IN LIGHTNING")
+		body.in_lightning()
+
+func _on_lightning_box_area_body_exited(body):
+	if body.has_method("out_lightning"):
+		print("OUT LIGHTNING")
+		body.out_lightning()

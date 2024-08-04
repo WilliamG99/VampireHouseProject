@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c17ntmp85ud7r"]
+
+[ext_resource type="Script" path="res://Scenes/9 - Door/door.gd" id="1_nedl4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3v8f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1gwjj"]
+material = SubResource("StandardMaterial3D_p3v8f")
+size = Vector3(2.5, 5, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_af5eg"]
+radius = 0.125
+height = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ouosc"]
+size = Vector3(5, 5, 5)
+
+[node name="Door" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_nedl4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_1gwjj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -0.25)
+mesh = SubResource("SphereMesh_af5eg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_ouosc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

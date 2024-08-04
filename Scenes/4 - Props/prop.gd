@@ -15,9 +15,9 @@ func throw(prop_interact):
 
 func _on_body_entered(body):
 	print(body)
-	
+	#Lock on
 	if body.get_parent().has_method("node_hit"):
 		body.get_parent().node_hit()
-		
+	#Hit Frank
 	if body.name == "Enemy":
 		body.frank_hit()
