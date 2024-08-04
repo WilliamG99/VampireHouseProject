@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cabxqqxie3kr3"
-path="res://.godot/imported/FryingPan.glb-76c32248ff1b443aeb8e1efba2110f26.scn"
+uid="uid://ddkwil5buj4ue"
+path="res://.godot/imported/Wall Art 06-1U5roiXQZAM.glb-a8791f93194217a5f389f43804607a59.scn"
 
 [deps]
 
-source_file="res://Assets/Models/FryingPan.glb"
-dest_files=["res://.godot/imported/FryingPan.glb-76c32248ff1b443aeb8e1efba2110f26.scn"]
+source_file="res://Assets/Models/Props/Wall Art 06-1U5roiXQZAM.glb"
+dest_files=["res://.godot/imported/Wall Art 06-1U5roiXQZAM.glb-a8791f93194217a5f389f43804607a59.scn"]
 
 [params]
 
-nodes/root_type="RigidBody3D"
-nodes/root_name="FryingPan"
+nodes/root_type=""
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
