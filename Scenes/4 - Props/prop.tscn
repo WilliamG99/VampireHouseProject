@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdb016fkvp4c6"]
+[gd_scene load_steps=9 format=3 uid="uid://cdb016fkvp4c6"]
 
 [ext_resource type="Script" path="res://Scenes/4 - Props/prop.gd" id="1_qsp88"]
+[ext_resource type="AudioStream" uid="uid://ck56tlirj6gg7" path="res://Assets/Audio/SFX/pan_hit.mp3" id="2_cy2hv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quxii"]
 resource_name = "Black"
@@ -119,5 +120,12 @@ mesh = SubResource("ArrayMesh_igb8a")
 [node name="PropCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(72.5211, 0, 0, 0, -3.17e-06, 72.5211, 0, -72.5211, -3.17e-06, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xi5mj")
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00345826, 0, 1.5767)
+stream = ExtResource("2_cy2hv")
+unit_size = 7.0
+bus = &"SFX"
+attenuation_filter_db = -31.3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

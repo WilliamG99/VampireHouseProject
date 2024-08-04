@@ -5,7 +5,7 @@ extends RigidBody3D
 @onready var hand = $PlayerMesh/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
-@onready var aim_raycast = $AimRaycast
+@onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 # Get audio references
 @onready var throw = $Audio/Throw

@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://yw2b72uisaoi"]
+[gd_scene load_steps=5 format=3 uid="uid://yw2b72uisaoi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b637v"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6p34"]
 
@@ -9,14 +12,20 @@ height = 0.5
 radial_segments = 8
 rings = 4
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_16qjh"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fgobg"]
 points = PackedVector3Array(-1.49012e-08, 0.0772318, 0.237764, -0.168129, 0.0772318, 0.168083, -0.168129, -0.0772807, 0.168083, -1.49012e-08, -0.0772807, 0.237718, 0.168083, -0.0772807, 0.168083, 0.168083, 0.0772318, 0.168083, 0.103894, 0.202232, 0.103894, -1.49012e-08, 0.202232, 0.146904, -0.10394, 0.202232, 0.103894, -0.237764, 0.0772318, 0, -0.237764, -0.0772807, 0, -0.10394, -0.202281, 0.103894, -1.49012e-08, -0.202281, 0.146904, 0.103894, -0.202281, 0.103894, 0.237764, -0.0772807, 0, 0.237764, 0.0772318, 0, -1.49012e-08, 0.25, 0, 0.146904, 0.202232, 0, -0.14695, 0.202232, 0, -0.168129, 0.0772318, -0.168129, -0.10394, 0.202232, -0.10394, -0.168129, -0.0772807, -0.168129, -0.10394, -0.202281, -0.10394, -0.14695, -0.202281, 0, -1.49012e-08, -0.25, 0, 0.146904, -0.202281, 0, 0.103894, -0.202281, -0.10394, 0.168083, -0.0772807, -0.168129, 0.168083, 0.0772318, -0.168129, 0.103894, 0.202232, -0.10394, -1.49012e-08, 0.202232, -0.14695, -1.49012e-08, 0.0772318, -0.237764, -1.49012e-08, -0.0772807, -0.237764, -1.49012e-08, -0.202281, -0.14695)
 
 [node name="LightSwitch" type="Area3D"]
 collision_mask = 15
 
-[node name="LightSwitchMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_wliyh")
-
 [node name="LightSwitchCollision" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_16qjh")
+shape = SubResource("SphereShape3D_b637v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="LightSwitchMesh" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("SphereMesh_wliyh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_fgobg")
