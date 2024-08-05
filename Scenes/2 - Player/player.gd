@@ -13,7 +13,7 @@ extends RigidBody3D
 var SPEED := 2250.0
 const LERP_VAL := 0.5
 const DESIRED_LIGHT_STATE := false
-const AIM_DIR_Y := Vector3(0,0,0)
+const AIM_DIR_Y := Vector3(0,5,0)
 const THROW_SPEED := 3000
 
 var direction : Vector3
@@ -72,7 +72,7 @@ func _physics_process(delta) -> void:
 		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
 		prop_interact.prop_position = hand.global_position
 		
-		prop_node.pick_up(prop_interact)
+		prop_node.get_parent().pick_up(prop_interact)
 		
 		# Locking On
 		if !locking_on and Input.is_action_just_pressed("aim"):
@@ -92,7 +92,12 @@ func _physics_process(delta) -> void:
 			prop_interact.prop_aim_direction_y = AIM_DIR_Y
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
 			throw.play()
-			prop_node.throw(prop_interact)
+			
+			if prop_node.get_parent().has_method("throw"):
+				prop_node.get_parent().throw(prop_interact)
+			elif prop_node.get_parent().get_parent().has_method("throw"):
+				prop_node.get_parent().get_parent().throw(prop_interact)
+			
 		elif Input.is_action_just_pressed("throw") and locking_on:
 			holding_prop = false
 			locking_on = false
@@ -101,7 +106,7 @@ func _physics_process(delta) -> void:
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = Vector3(0,0,0)
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
-			prop_node.throw(prop_interact)
+			prop_node.get_parent().throw(prop_interact)
 			
 	if holding_prop and locking_on and raycast.get_collider():
 		lock_on_node = raycast.get_collider().get_parent()
@@ -121,12 +126,13 @@ func _physics_process(delta) -> void:
 
 # Prop Interaction Collison Signals
 func _on_prop_interact_area_body_entered(body) -> void:
-	if body.has_method("pick_up"):
+	if body.has_method("pick_up") or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = true
+		print(body)
 		prop_node = body
 
 func _on_prop_interact_area_body_exited(body) -> void:
-	if body.has_method("pick_up"):
+	if body.has_method("pick_up")  or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = false
 		prop_node = null
 

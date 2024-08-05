@@ -15,12 +15,12 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_85ohn"]
+[sub_resource type="Sky" id="Sky_4fu4g"]
 sky_material = SubResource("ProceduralSkyMaterial_shhn6")
 
 [sub_resource type="Environment" id="Environment_8lvuc"]
 background_mode = 2
-sky = SubResource("Sky_85ohn")
+sky = SubResource("Sky_4fu4g")
 ambient_light_source = 3
 tonemap_mode = 2
 tonemap_exposure = 0.9
@@ -127,7 +127,6 @@ environment = SubResource("Environment_8lvuc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-visible = false
 shadow_enabled = true
 
 [node name="Door" parent="." instance=ExtResource("2_3xc2e")]
