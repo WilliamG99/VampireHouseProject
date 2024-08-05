@@ -4,6 +4,8 @@ extends Node3D
 @onready var lightning_timer = $LightningTimer
 @onready var lightning_length_timer = $LightningLengthTimer
 
+# Get sounds FX refference
+@onready var thunder = $Thunder
 
 const TIMER_MAX := 5
 const TIMER_MIN := 1
@@ -20,6 +22,9 @@ func _on_timer_timeout():
 	
 	# Starts lightning length timer here
 	lightning_length_timer.start()
+	
+	# PLay sound effect
+	thunder.play()
 
 
 func _on_lightning_length_timer_timeout():
