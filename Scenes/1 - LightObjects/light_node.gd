@@ -7,7 +7,6 @@ extends Node3D
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
 @export_range(0.0, 1.0, 0.01) var opacity: float = 0.2
 
-
 func get_length() -> float:
 	return length
 
@@ -28,7 +27,6 @@ func _on_light_switch_body_entered(body : RigidBody3D):
 			
 		elif !has_node("LightSource") and body.get_desired_light_state():
 			add_child(light_source)
-	
 	else:
 		if has_node("LightSource"):
 			remove_child(light_source)

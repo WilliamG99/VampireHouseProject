@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://go40bp5q8md6"]
+[gd_scene load_steps=3 format=3 uid="uid://go40bp5q8md6"]
 
 [ext_resource type="Script" path="res://Scenes/1 - LightObjects/light_source_effect.gd" id="1_7hnu1"]
+[ext_resource type="AudioStream" uid="uid://c50u3e8gjymkg" path="res://Assets/Audio/SFX/light_buzz.mp3" id="2_l7eh2"]
 
 [node name="LightSource" type="SpotLight3D"]
 unique_name_in_owner = true
@@ -12,3 +13,10 @@ spot_attenuation = 1.04219e-05
 spot_angle = 20.0
 spot_angle_attenuation = 1e-05
 script = ExtResource("1_7hnu1")
+
+[node name="LightBuzz" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.56751e-08, -4.66881)
+stream = ExtResource("2_l7eh2")
+volume_db = 5.0
+
+[connection signal="finished" from="LightBuzz" to="." method="_on_light_buzz_finished"]

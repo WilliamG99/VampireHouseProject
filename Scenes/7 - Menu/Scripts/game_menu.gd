@@ -46,7 +46,7 @@ func _on_click_finished():
 		# Return to title scene
 		print("game_menu.gd::38::RETURN_BUTTON_PRESSED")
 		print("Returning to title screen.")
-		get_tree().change_scene_to_file("res://Scenes/6 - Menu/Scenes/start_menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/start_menu.tscn")
 		
 	if exit:
 		# Reset bool 

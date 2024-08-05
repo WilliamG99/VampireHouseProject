@@ -10,6 +10,9 @@ var _cone_mesh: MeshInstance3D = null
 var _area3D: Area3D = null
 var _cone_collision : CollisionShape3D = null
 
+# Get sound refference
+@onready var light_buzz = $LightBuzz
+
 
 func _ready() -> void:
 	
@@ -44,6 +47,8 @@ func _ready() -> void:
 	
 	self._area3D.body_entered.connect(_on_body_entered)
 	self._area3D.body_exited.connect(_on_body_exited)
+	
+	light_buzz.play()
 	
 func _on_body_entered(body):
 	if body.has_method("in_light"):
@@ -80,3 +85,7 @@ func update_cone() -> void:
 	_cone_mesh.mesh.top_radius = 0.0
 	_cone_mesh.mesh.bottom_radius = length * sin(a) / sin(c)
 	_cone_mesh.mesh.height = length
+
+
+func _on_light_buzz_finished():
+	light_buzz.play()

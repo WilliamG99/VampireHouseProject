@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://rgn7700qf548"]
+[gd_scene load_steps=8 format=3 uid="uid://rgn7700qf548"]
 
 [ext_resource type="Script" path="res://Scenes/5 - LightningEvent/LightningEvent.gd" id="1_oe2c5"]
+[ext_resource type="AudioStream" uid="uid://b7ycalm68q2xn" path="res://Assets/Audio/SFX/thunder.mp3" id="2_pug4e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j31ju"]
 size = Vector3(6, 2, 1)
@@ -79,6 +80,11 @@ autostart = true
 [node name="LightningLengthTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Thunder" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_pug4e")
+max_distance = 35.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="LightningEffect/LightningBoxArea" to="." method="_on_lightning_box_area_body_entered"]
 [connection signal="body_exited" from="LightningEffect/LightningBoxArea" to="." method="_on_lightning_box_area_body_exited"]
