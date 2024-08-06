@@ -1,0 +1,268 @@
+[gd_scene load_steps=20 format=3 uid="uid://ba1ua2ujxnlf1"]
+
+[ext_resource type="PackedScene" uid="uid://cklncx8u4x0ue" path="res://Assets/Models/LowPolyDungoen/Dungeon_Hall_Center.glb" id="1_fbiq3"]
+[ext_resource type="PackedScene" uid="uid://djvil5ersipyy" path="res://Assets/Models/LowPolyDungoen/Dungeon_Hall_Corner.glb" id="2_bnp4u"]
+[ext_resource type="PackedScene" uid="uid://cefbgaqrwoq18" path="res://Assets/Models/LowPolyDungoen/Dungeon_Hall_Wall.glb" id="3_73ewo"]
+[ext_resource type="PackedScene" uid="uid://h5vidnpbtbh0" path="res://Assets/Models/LowPolyDungoen/Dungeon_Big_Wall.glb" id="4_4g2j7"]
+[ext_resource type="PackedScene" uid="uid://bwtppkn1aj25a" path="res://Assets/Models/LowPolyDungoen/Dungeon_Wall_Var3.glb" id="5_jy5qs"]
+[ext_resource type="PackedScene" uid="uid://cwp3k8gtsygrv" path="res://Assets/Models/LowPolyDungoen/Dungeon_Wall_Var2.glb" id="6_kqr1e"]
+[ext_resource type="PackedScene" uid="uid://dklth0g3vong5" path="res://Assets/Models/LowPolyDungoen/Dungeon_Wall_Var1.glb" id="7_xkod6"]
+[ext_resource type="PackedScene" uid="uid://bkqxvn8btk8c4" path="res://Assets/Models/LowPolyDungoen/Dungeon_Custom_Border_Arched.glb" id="8_poar5"]
+[ext_resource type="PackedScene" uid="uid://df040hph2r842" path="res://Assets/Models/LowPolyDungoen/HoleFix_Half.glb" id="9_hlxqt"]
+[ext_resource type="PackedScene" uid="uid://nj8r60cb717g" path="res://Assets/Models/LowPolyDungoen/Dungeon_Wall_Window.glb" id="10_vakhy"]
+[ext_resource type="PackedScene" uid="uid://iwsi44w8iprv" path="res://Assets/Models/LowPolyDungoen/Dungeon_Passage.glb" id="11_kkc52"]
+[ext_resource type="PackedScene" uid="uid://dwy5tjmtk0650" path="res://Assets/Models/LowPolyDungoen/Balcony.glb" id="12_vabve"]
+[ext_resource type="PackedScene" uid="uid://dph5nx0ajrp7s" path="res://Assets/Models/LowPolyDungoen/Balcony_Post.glb" id="13_mw1uk"]
+[ext_resource type="PackedScene" uid="uid://cnx2w8o7dr7vo" path="res://Assets/Models/LowPolyDungoen/Balcony_Railing.glb" id="14_hbh42"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w1h6i"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4fu4g"]
+sky_material = SubResource("ProceduralSkyMaterial_w1h6i")
+
+[sub_resource type="Environment" id="Environment_1lv45"]
+background_mode = 2
+sky = SubResource("Sky_4fu4g")
+ambient_light_source = 3
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.5
+ssil_radius = 6.3
+ssil_intensity = 7.35
+glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.5
+adjustment_saturation = 1.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5bgf6"]
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tayvx"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1lv45")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="FloorPlane" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.076685, 0)
+mesh = SubResource("PlaneMesh_5bgf6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/FloorPlane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/FloorPlane/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_tayvx")
+
+[node name="Dungeon_Hall_Center2" parent="Environment" instance=ExtResource("1_fbiq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Dungeon_Hall_Center3" parent="Environment" instance=ExtResource("1_fbiq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Dungeon_Hall_Center4" parent="Environment" instance=ExtResource("1_fbiq3")]
+
+[node name="Dungeon_Hall_Center5" parent="Environment" instance=ExtResource("1_fbiq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Dungeon_Hall_Center6" parent="Environment" instance=ExtResource("1_fbiq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Dungeon_Hall_Center7" parent="Environment" instance=ExtResource("1_fbiq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Dungeon_Hall_Corner2" parent="Environment" instance=ExtResource("2_bnp4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+
+[node name="Dungeon_Hall_Corner5" parent="Environment" instance=ExtResource("2_bnp4u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 0, -4)
+
+[node name="Dungeon_Hall_Corner3" parent="Environment" instance=ExtResource("2_bnp4u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, 4)
+
+[node name="Dungeon_Hall_Corner4" parent="Environment" instance=ExtResource("2_bnp4u")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -16, 0, 4)
+
+[node name="Dungeon_Hall_Wall" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, 0)
+
+[node name="Dungeon_Hall_Wall2" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8, 0, 4)
+
+[node name="Dungeon_Hall_Wall3" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 4)
+
+[node name="Dungeon_Hall_Wall4" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 4)
+
+[node name="Dungeon_Hall_Wall5" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, 0, 4)
+
+[node name="Dungeon_Hall_Wall6" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8, 0, 4)
+
+[node name="Dungeon_Hall_Wall7" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -12, 0, 4)
+
+[node name="Dungeon_Hall_Wall9" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
+
+[node name="Dungeon_Hall_Wall10" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="Dungeon_Hall_Wall11" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="Dungeon_Hall_Wall12" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Dungeon_Hall_Wall13" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="Dungeon_Hall_Wall14" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+
+[node name="Dungeon_Hall_Wall8" parent="Environment" instance=ExtResource("3_73ewo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 0, 0)
+
+[node name="Dungeon_Big_Wall2" parent="Environment" instance=ExtResource("4_4g2j7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+
+[node name="Dungeon_Big_Wall3" parent="Environment" instance=ExtResource("4_4g2j7")]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 10, 0, 2)
+
+[node name="Dungeon_Wall_Var32" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, 0)
+
+[node name="Dungeon_Wall_Var22" parent="Environment" instance=ExtResource("6_kqr1e")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, 4)
+
+[node name="Dungeon_Wall_Var12" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, -4)
+
+[node name="Dungeon_Wall_Var34" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 0, 0)
+
+[node name="Dungeon_Wall_Var23" parent="Environment" instance=ExtResource("6_kqr1e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 0, -4)
+
+[node name="Dungeon_Wall_Var14" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 0, 4)
+
+[node name="Dungeon_Wall_Var38" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 5, 4)
+
+[node name="Dungeon_Wall_Var26" parent="Environment" instance=ExtResource("6_kqr1e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 5, 0)
+
+[node name="Dungeon_Wall_Var18" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 5, -4)
+
+[node name="Dungeon_Wall_Var24" parent="Environment" instance=ExtResource("6_kqr1e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -12, 5, 4)
+
+[node name="Dungeon_Wall_Var25" parent="Environment" instance=ExtResource("6_kqr1e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, -4)
+
+[node name="Dungeon_Wall_Var33" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 0, 4)
+
+[node name="Dungeon_Wall_Var13" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 0, 4)
+
+[node name="Dungeon_Wall_Var36" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 5, 4)
+
+[node name="Dungeon_Wall_Var16" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 5, 4)
+
+[node name="Dungeon_Wall_Var37" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -12, 5, -4)
+
+[node name="Dungeon_Wall_Var17" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -8, 5, -4)
+
+[node name="Dungeon_Wall_Var35" parent="Environment" instance=ExtResource("5_jy5qs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="Dungeon_Wall_Var15" parent="Environment" instance=ExtResource("7_xkod6")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -4, 0, -4)
+
+[node name="Dungeon_Custom_Border_Arched2" parent="." instance=ExtResource("8_poar5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 8)
+
+[node name="Dungeon_Custom_Border_Arched3" parent="." instance=ExtResource("8_poar5")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 8)
+
+[node name="HoleFix_Half2" parent="." instance=ExtResource("9_hlxqt")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6, 0, 6)
+
+[node name="HoleFix_Half3" parent="." instance=ExtResource("9_hlxqt")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -2, 0, 6)
+
+[node name="Dungeon_Wall_Window2" parent="." instance=ExtResource("10_vakhy")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -12, 0, 4)
+
+[node name="Dungeon_Passage2" parent="." instance=ExtResource("11_kkc52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 6)
+
+[node name="Dungeon_Custom_Border_Arched4" parent="." instance=ExtResource("8_poar5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -8)
+
+[node name="Dungeon_Custom_Border_Arched5" parent="." instance=ExtResource("8_poar5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -8)
+
+[node name="HoleFix_Half4" parent="." instance=ExtResource("9_hlxqt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+
+[node name="HoleFix_Half5" parent="." instance=ExtResource("9_hlxqt")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6, 0, -6)
+
+[node name="Dungeon_Wall_Window3" parent="." instance=ExtResource("10_vakhy")]
+transform = Transform3D(1, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 1, -12, 0, -4)
+
+[node name="Dungeon_Passage3" parent="." instance=ExtResource("11_kkc52")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16, 0, -6)
+
+[node name="DungeonHallBalcony" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 5, 0)
+
+[node name="Balcony2" parent="DungeonHallBalcony" instance=ExtResource("12_vabve")]
+
+[node name="Balcony3" parent="DungeonHallBalcony" instance=ExtResource("12_vabve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Balcony4" parent="DungeonHallBalcony" instance=ExtResource("12_vabve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Balcony_Post2" parent="DungeonHallBalcony" instance=ExtResource("13_mw1uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5.82884)
+
+[node name="Balcony_Post3" parent="DungeonHallBalcony" instance=ExtResource("13_mw1uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="Balcony_Post4" parent="DungeonHallBalcony" instance=ExtResource("13_mw1uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Balcony_Post5" parent="DungeonHallBalcony" instance=ExtResource("13_mw1uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5.83898)
+
+[node name="HoleFix_Half2" parent="DungeonHallBalcony" instance=ExtResource("9_hlxqt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 6)
+
+[node name="HoleFix_Half3" parent="DungeonHallBalcony" instance=ExtResource("9_hlxqt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, -6)
+
+[node name="AuxScene" parent="." instance=ExtResource("14_hbh42")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14, 5, 4)
+
+[node name="AuxScene2" parent="." instance=ExtResource("14_hbh42")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14, 5, 0)
+
+[node name="AuxScene3" parent="." instance=ExtResource("14_hbh42")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14, 5, -4)

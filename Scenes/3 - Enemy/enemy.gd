@@ -54,8 +54,8 @@ func _physics_process(delta) -> void:
 	apply_central_force(direction * SPEED * delta)
 	if SPEED > 0.0:
 		anim_tree.set("parameters/running/transition_request", "true")
-	#elif SPEED == 0.0:
-		#anim_tree.set("parameters/running/transition_request", "false")
+	elif SPEED == 0.0:
+		anim_tree.set("parameters/running/transition_request", "false")
 	
 	# Prop Interaction
 	# enemy has two timers, one for next prop pickup time and other for time till throw after pickup

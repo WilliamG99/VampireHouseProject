@@ -1,17 +1,19 @@
 extends RigidBody3D
 
 
-@onready var mesh = $PlayerMesh
-@onready var hand = $PlayerMesh/PlayerHand
+@onready var mesh = $VampireKid
+@onready var hand = $VampireKid/PlayerHand
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
 @onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
+@onready var anim_tree = $VampireKid/AnimationTree
+
 
 # Get audio references
 @onready var throw = $Audio/Throw
 
 var SPEED := 2250.0
-const LERP_VAL := 0.5
+const LERP_VAL := 0.3
 const DESIRED_LIGHT_STATE := false
 const AIM_DIR_Y := Vector3(0,5,0)
 const THROW_SPEED := 3000
@@ -46,6 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Prop Interaction
 	if near_prop and !holding_prop and Input.is_action_just_pressed("interact"):
 		holding_prop = true
+		anim_tree.set("parameters/isHoldingRunning/transition_request", "true")
+		anim_tree.set("parameters/isHoldingIdle/transition_request", "true")
 
 
 func get_desired_light_state() -> bool:
@@ -57,13 +61,14 @@ func _physics_process(delta) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
-	rotation.y = spring_arm_pivot.rotation.y
-	mesh.rotation.y = spring_arm_pivot.rotation.y
+
 	
 	if direction:
 		apply_central_force(direction * SPEED * delta)
-		#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
-	
+		anim_tree.set("parameters/isRunning/transition_request", "true")
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(-direction.x, -direction.z), LERP_VAL)
+	else:
+		anim_tree.set("parameters/isRunning/transition_request", "false")
 	
 	# Prop Interaction
 	if holding_prop:
@@ -126,13 +131,19 @@ func _physics_process(delta) -> void:
 
 # Prop Interaction Collison Signals
 func _on_prop_interact_area_body_entered(body) -> void:
-	if body.has_method("pick_up") or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
+	if holding_prop:
+		return
+	elif body.has_method("pick_up") or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = true
 		print(body)
 		prop_node = body
 
 func _on_prop_interact_area_body_exited(body) -> void:
-	if body.has_method("pick_up")  or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
+	if holding_prop:
+		return
+	elif body.has_method("pick_up")  or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
+		anim_tree.set("parameters/isHoldingRunning/transition_request", "false")
+		anim_tree.set("parameters/isHoldingIdle/transition_request", "false")
 		near_prop = false
 		prop_node = null
 
@@ -142,8 +153,12 @@ func game_over():
 	
 # Enemy Collision
 func _on_body_entered(body):
+	print("HIT!")
+	print(body)
 	if body.name == "Enemy":
 		game_over()
+	if body.name == "Node":
+		print("HIT")
 
 
 func in_light():
