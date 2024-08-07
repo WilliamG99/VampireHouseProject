@@ -1,0 +1,44 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://c4d72j3te36de"
+path="res://.godot/imported/Couch Small.glb-08f07c0443030d06bb5ffe4869e91c1f.scn"
+
+[deps]
+
+source_file="res://Assets/Models/Props/FreeModels/More/Couch Small.glb"
+dest_files=["res://.godot/imported/Couch Small.glb-08f07c0443030d06bb5ffe4869e91c1f.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.25
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:RootNode/Couch_Small1": {
+"generate/physics": true,
+"physics/body_type": 1,
+"physics/layer": 8,
+"physics/mask": 15,
+"physics/shape_type": 1
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
