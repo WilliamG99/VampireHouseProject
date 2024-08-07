@@ -1,0 +1,44 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://clx6l14hb1dah"
+path="res://.godot/imported/Dish.glb-09632ce53d5f16a18b9e3d28028bde17.scn"
+
+[deps]
+
+source_file="res://Assets/Models/Props/FreeModels/New/Dish.glb"
+dest_files=["res://.godot/imported/Dish.glb-09632ce53d5f16a18b9e3d28028bde17.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=2.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Cylinder_Cylinder_001": {
+"generate/physics": true,
+"physics/body_type": 1,
+"physics/layer": 8,
+"physics/mask": 15,
+"physics/shape_type": 1
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

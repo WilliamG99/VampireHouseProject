@@ -1,0 +1,44 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://blelxpc72yf8v"
+path="res://.godot/imported/Cast Iron Skillet.glb-b1628120f246e32403c34a5d1a9fb6a2.scn"
+
+[deps]
+
+source_file="res://Assets/Models/Props/FreeModels/New/Cast Iron Skillet.glb"
+dest_files=["res://.godot/imported/Cast Iron Skillet.glb-b1628120f246e32403c34a5d1a9fb6a2.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=0.25
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:pan_cast_iron_skillet_Cylinder_049": {
+"decomposition/precision": 4,
+"generate/physics": true,
+"physics/body_type": 1,
+"physics/layer": 8,
+"physics/mask": 15
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
