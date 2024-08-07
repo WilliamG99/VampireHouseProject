@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://btxqrxnvads51"
-path="res://.godot/imported/frankenstein.glb-704bd85fb29635d10542322a49511d8c.scn"
+uid="uid://c0grnc2tu2hiu"
+path="res://.godot/imported/frankenstein.glb-25b61583dd7e8a82322874ce93a61930.scn"
 
 [deps]
 
-source_file="res://Assets/Models/frankenstein.glb"
-dest_files=["res://.godot/imported/frankenstein.glb-704bd85fb29635d10542322a49511d8c.scn"]
+source_file="res://Assets/Models/Frank/frankenstein.glb"
+dest_files=["res://.godot/imported/frankenstein.glb-25b61583dd7e8a82322874ce93a61930.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -31,7 +31,7 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "animations": {
-"idle": {
+"Idle": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -1830,7 +1830,7 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"run": {
+"ItemRun": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -3629,7 +3629,7 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"run_with_item": {
+"Run": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",

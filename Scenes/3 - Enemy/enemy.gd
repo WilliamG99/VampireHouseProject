@@ -11,7 +11,7 @@ extends RigidBody3D
 @onready var anim_tree = $frankenstein/AnimationTree
 
 
-const SPEED = 0.0
+const SPEED = 1750.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
 const AIM_DIR_Y := Vector3(0,0,0)
@@ -53,14 +53,14 @@ func _physics_process(delta) -> void:
 	
 	apply_central_force(direction * SPEED * delta)
 	if SPEED > 0.0:
-		anim_tree.set("parameters/running/transition_request", "true")
+		anim_tree.set("parameters/isRunning/transition_request", "true")
 	elif SPEED == 0.0:
-		anim_tree.set("parameters/running/transition_request", "false")
+		anim_tree.set("parameters/isRunning/transition_request", "false")
 	
 	# Prop Interaction
 	# enemy has two timers, one for next prop pickup time and other for time till throw after pickup
 	if near_prop and !holding_prop and !pick_up_timer_on:
-		anim_tree.set("parameters/holding/transition_request", "true")
+		anim_tree.set("parameters/isHolding/transition_request", "true")
 		holding_prop = true
 		throw_timer_on = true
 		throw_timer.start()
@@ -79,7 +79,7 @@ func _physics_process(delta) -> void:
 			pick_up_timer_on = true
 			pick_up_timer.start()
 			
-			anim_tree.set("parameters/holding/transition_request", "false")
+			anim_tree.set("parameters/isHolding/transition_request", "false")
 			
 			aim_dir = -mesh.global_transform.basis.z
 			prop_interact.prop_aim_direction = aim_dir
@@ -90,7 +90,7 @@ func _physics_process(delta) -> void:
 
 
 func frank_hit():
-	anim_tree.set("parameters/is_hit/transition_request", "true")
+	anim_tree.set("parameters/isHit/transition_request", "true")
 
 
 # Prop Interaction Collison Signals

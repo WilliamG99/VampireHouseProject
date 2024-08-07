@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://drqgscf3l2qpr"]
 
 [ext_resource type="Script" path="res://Scenes/3 - Enemy/enemy.gd" id="1_el7qd"]
-[ext_resource type="PackedScene" uid="uid://bdhwqmnyhghlo" path="res://Scenes/3 - Enemy/frankenstein.tscn" id="2_ep4jc"]
+[ext_resource type="PackedScene" uid="uid://0wyeis1j5fvc" path="res://Scenes/3 - Enemy/frankenstein.tscn" id="2_ep4jc"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_22tv7"]
-radius = 0.2
-height = 0.4
+[sub_resource type="SphereMesh" id="SphereMesh_o1nge"]
+radius = 0.25
+height = 0.5
 radial_segments = 4
 rings = 2
 
@@ -25,11 +25,10 @@ script = ExtResource("1_el7qd")
 
 [node name="frankenstein" parent="." instance=ExtResource("2_ep4jc")]
 
-[node name="EnemyHand" type="Node3D" parent="frankenstein"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.74846e-07, 2.5, -2)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="frankenstein/EnemyHand"]
-mesh = SubResource("SphereMesh_22tv7")
+[node name="EnemyHand" type="MeshInstance3D" parent="frankenstein"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.5, -2.72649)
+mesh = SubResource("SphereMesh_o1nge")
+skeleton = NodePath("../..")
 
 [node name="EnemyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
