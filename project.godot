@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VampireHouse"
-run/main_scene="res://Scenes/7 - Menu/Scenes/start_menu.tscn"
+run/main_scene="res://Scenes/test_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

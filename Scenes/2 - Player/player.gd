@@ -11,6 +11,18 @@ extends RigidBody3D
 
 # Get audio references
 @onready var throw = $Audio/Throw
+@onready var ary_wood_walking_sounds = [
+	$Audio/WoodSteps/Step1,
+	$Audio/WoodSteps/Step2,
+	$Audio/WoodSteps/Step3,
+	$Audio/WoodSteps/Step4,
+	$Audio/WoodSteps/Step5,
+	$Audio/WoodSteps/Step6,
+	]
+@onready var pickup = $Audio/Equip
+
+# Walk sound timer
+@onready var walk_cycle = $WalkCycle
 
 var SPEED := 2250.0
 const LERP_VAL := 0.3
@@ -47,6 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# Prop Interaction
 	if near_prop and !holding_prop and Input.is_action_just_pressed("interact"):
+		pickup.play()
 		holding_prop = true
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "true")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "true")
@@ -64,6 +77,9 @@ func _physics_process(delta) -> void:
 
 	
 	if direction:
+		if walk_cycle.time_left <= 0:
+			ary_wood_walking_sounds[randi_range(0, 5)].play()
+			walk_cycle.start(0.3)
 		apply_central_force(direction * SPEED * delta)
 		anim_tree.set("parameters/isRunning/transition_request", "true")
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(-direction.x, -direction.z), LERP_VAL)

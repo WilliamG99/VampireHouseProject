@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b0t53pcbo83v1" path="res://Assets/Audio/SFX/WoodRunning1.wav" id="3_wfefh"]
 [ext_resource type="AudioStream" uid="uid://jtdgwsir3n26" path="res://Assets/Audio/SFX/WoodRunning2.wav" id="4_e51jq"]
 [ext_resource type="AudioStream" uid="uid://cwpg08p145qd3" path="res://Assets/Audio/SFX/Woodrunning3.wav" id="5_5f55b"]
-[ext_resource type="AudioStream" uid="uid://sandu6hsgyvu" path="res://Assets/Audio/SFX/WoodRunning4.wav" id="6_bvrgu"]
+[ext_resource type="AudioStream" uid="uid://b8eg4xwyhyowp" path="res://Assets/Audio/SFX/Wood4.wav" id="6_k5vl2"]
 [ext_resource type="AudioStream" uid="uid://c6xbcpg5t136n" path="res://Assets/Audio/SFX/WoodRunning5.wav" id="7_8gwmi"]
 [ext_resource type="AudioStream" uid="uid://8gvj5wqgtdwc" path="res://Assets/Audio/SFX/WoodRunning6.wav" id="8_u6pls"]
 
@@ -63,22 +63,24 @@ wait_time = 5.0
 [node name="WalkCycle" type="Timer" parent="Audio"]
 one_shot = true
 
-[node name="Step1" type="AudioStreamPlayer3D" parent="."]
+[node name="WoodSteps" type="Node" parent="Audio"]
+
+[node name="Step1" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
 stream = ExtResource("3_wfefh")
 
-[node name="Step2" type="AudioStreamPlayer3D" parent="."]
+[node name="Step2" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
 stream = ExtResource("4_e51jq")
 
-[node name="Step3" type="AudioStreamPlayer3D" parent="."]
+[node name="Step3" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
 stream = ExtResource("5_5f55b")
 
-[node name="Step4" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_bvrgu")
+[node name="Step4" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("6_k5vl2")
 
-[node name="Step5" type="AudioStreamPlayer3D" parent="."]
+[node name="Step5" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
 stream = ExtResource("7_8gwmi")
 
-[node name="Step6" type="AudioStreamPlayer3D" parent="."]
+[node name="Step6" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
 stream = ExtResource("8_u6pls")
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]

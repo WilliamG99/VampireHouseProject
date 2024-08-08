@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://btdhwtdbt0oas"]
+[gd_scene load_steps=13 format=3 uid="uid://btdhwtdbt0oas"]
 
 [ext_resource type="Script" path="res://Scenes/2 - Player/player.gd" id="1_3jjk2"]
 [ext_resource type="AudioStream" uid="uid://cpancows1xwqp" path="res://Assets/Audio/SFX/throw.mp3" id="2_7evc4"]
 [ext_resource type="PackedScene" uid="uid://dmpvoayojf43o" path="res://Scenes/2 - Player/vampire_kid.tscn" id="2_pojsg"]
+[ext_resource type="AudioStream" uid="uid://b0t53pcbo83v1" path="res://Assets/Audio/SFX/WoodRunning1.wav" id="4_ytyx3"]
+[ext_resource type="AudioStream" uid="uid://jtdgwsir3n26" path="res://Assets/Audio/SFX/WoodRunning2.wav" id="5_08o4p"]
+[ext_resource type="AudioStream" uid="uid://cwpg08p145qd3" path="res://Assets/Audio/SFX/Woodrunning3.wav" id="6_0h5g8"]
+[ext_resource type="AudioStream" uid="uid://b8eg4xwyhyowp" path="res://Assets/Audio/SFX/Wood4.wav" id="7_yt8dl"]
+[ext_resource type="AudioStream" uid="uid://c6xbcpg5t136n" path="res://Assets/Audio/SFX/WoodRunning5.wav" id="8_5doas"]
+[ext_resource type="AudioStream" uid="uid://8gvj5wqgtdwc" path="res://Assets/Audio/SFX/WoodRunning6.wav" id="9_noipm"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_8uogg"]
 radius = 0.2
@@ -72,6 +78,34 @@ shape = SubResource("SphereShape3D_x4iea")
 stream = ExtResource("2_7evc4")
 volume_db = -7.0
 bus = &"SFX"
+
+[node name="Equip" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_7evc4")
+pitch_scale = 3.0
+
+[node name="WoodSteps" type="Node" parent="Audio"]
+
+[node name="Step1" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("4_ytyx3")
+
+[node name="Step2" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("5_08o4p")
+
+[node name="Step3" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("6_0h5g8")
+
+[node name="Step4" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("7_yt8dl")
+
+[node name="Step5" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("8_5doas")
+
+[node name="Step6" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("9_noipm")
+
+[node name="WalkCycle" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]

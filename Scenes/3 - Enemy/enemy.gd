@@ -10,7 +10,19 @@ extends RigidBody3D
 @onready var pick_up_timer = $PickUpTimer
 @onready var anim_tree = $frankenstein/AnimationTree
 
+# Get sound refference
+@onready var ary_wood_walking_sounds = [
+	$Step1,
+	$Step2,
+	$Step3,
+	$Step4,
+	$Step5,
+	$Step6,
+	]
+# Walk cycle timer
+@onready var walk_cycle = $Audio/WalkCycle
 
+	
 const SPEED = 1500.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
@@ -47,13 +59,19 @@ func _physics_process(delta) -> void:
 	next_location = nav_agent.get_next_path_position()
 	direction = (next_location - current_location).normalized()
 	direction.y = 0
-	
+
 	rotation.y = lerp_angle(rotation.y, (atan2(-direction.x, -direction.z)), LERP_VAL)
 	#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 	
 	apply_central_force(direction * SPEED * delta)
 	if SPEED > 0.0:
 		anim_tree.set("parameters/isRunning/transition_request", "true")
+		if walk_cycle.time_left <= 0:
+			var i = randi_range(0, 5)
+			ary_wood_walking_sounds[i].pitch_scale = 0.8
+			ary_wood_walking_sounds[i].play()
+			walk_cycle.start(0.3)
+			
 	elif SPEED == 0.0:
 		anim_tree.set("parameters/isRunning/transition_request", "false")
 	
