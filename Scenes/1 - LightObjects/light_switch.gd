@@ -10,10 +10,8 @@ func _ready():
 func _process(delta):
 	pass
 	
-
-	
-
-
-func _on_light_node_switch_off():
-	print("DRAGANE")
-	switch_off.play()
+func play_sound(sound):
+	if sound == "off":
+		switch_off.play()
+	elif sound == "on":
+		switch_off.play()

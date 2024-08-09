@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqmged03j2tlx"]
 
-[ext_resource type="AudioStream" uid="uid://ck56tlirj6gg7" path="res://Assets/Audio/SFX/pan_hit.mp3" id="2_uoajx"]
+[ext_resource type="AudioStream" uid="uid://don36fp3t51n5" path="res://Assets/Audio/SFX/default_thump.mp3" id="1_a8mtk"]
 
 [node name="Prop" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Hit" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00345826, 0, 1.5767)
-stream = ExtResource("2_uoajx")
+stream = ExtResource("1_a8mtk")
 unit_size = 7.0
 bus = &"SFX"
 attenuation_filter_db = -31.3
