@@ -25,6 +25,6 @@ func _on_body_entered(body):
 	#Hit Frank
 	if body.name == "Enemy":
 		body.frank_hit()
-	print("dado")
+		
 	hit.pitch_scale = randf_range(0.98, 1.02)
 	hit.play()
