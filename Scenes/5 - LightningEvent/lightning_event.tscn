@@ -1,51 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://rgn7700qf548"]
+[gd_scene load_steps=6 format=3 uid="uid://rgn7700qf548"]
 
 [ext_resource type="Script" path="res://Scenes/5 - LightningEvent/LightningEvent.gd" id="1_oe2c5"]
 [ext_resource type="AudioStream" uid="uid://b7ycalm68q2xn" path="res://Assets/Audio/SFX/thunder.mp3" id="2_pug4e"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_j31ju"]
-size = Vector3(6, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6o1no"]
-size = Vector3(3, 6, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akcjl"]
 shading_mode = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_de6f2"]
 material = SubResource("StandardMaterial3D_akcjl")
-size = Vector3(3, 2.75, 30)
+size = Vector3(4.2, 5.4, 30)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g7cci"]
-points = PackedVector3Array(1.5, 1.375, 15, 1.5, -1.375, 15, 1.5, 1.375, -15, -1.5, 1.375, 15, -1.5, -1.375, 15, 1.5, -1.375, -15, -1.5, 1.375, -15, -1.5, -1.375, -15)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gx0c4"]
+points = PackedVector3Array(-2.1, -2.7, -15, 2.1, -2.7, -15, -2.1, -2.7, 15, -2.1, 2.7, -15, 2.1, 2.7, -15, 2.1, -2.7, 15, -2.1, 2.7, 15, 2.1, 2.7, 15)
 
 [node name="LightningEvent" type="Node3D"]
 script = ExtResource("1_oe2c5")
 
-[node name="Wall" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 0)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.5, 0)
-mesh = SubResource("BoxMesh_j31ju")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
-mesh = SubResource("BoxMesh_j31ju")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
-mesh = SubResource("BoxMesh_6o1no")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wall"]
-mesh = SubResource("BoxMesh_6o1no")
-skeleton = NodePath("../..")
-
 [node name="LightningEffect" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LightningBoxArea" type="Area3D" parent="LightningEffect"]
 collision_layer = 0
@@ -59,10 +31,10 @@ mesh = SubResource("BoxMesh_de6f2")
 skeleton = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LightningEffect/LightningBoxArea"]
-shape = SubResource("ConvexPolygonShape3D_g7cci")
+shape = SubResource("ConvexPolygonShape3D_gx0c4")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="LightningEffect"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.0270259, 6.94381)
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.0270259, 10.9438)
 light_energy = 2.0
 shadow_enabled = true
 shadow_normal_bias = 0.0
@@ -73,14 +45,6 @@ spot_attenuation = 1e-05
 spot_angle = 15.0
 spot_angle_attenuation = 1e-05
 
-[node name="LightningTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
-[node name="LightningLengthTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="Thunder" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_pug4e")
 max_distance = 35.0
@@ -88,5 +52,3 @@ bus = &"SFX"
 
 [connection signal="body_entered" from="LightningEffect/LightningBoxArea" to="." method="_on_lightning_box_area_body_entered"]
 [connection signal="body_exited" from="LightningEffect/LightningBoxArea" to="." method="_on_lightning_box_area_body_exited"]
-[connection signal="timeout" from="LightningTimer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="LightningLengthTimer" to="." method="_on_lightning_length_timer_timeout"]

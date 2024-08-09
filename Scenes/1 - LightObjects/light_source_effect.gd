@@ -1,9 +1,9 @@
 extends SpotLight3D
 
-@export var length: float = 10
+@export var length: float = 13
 @export var angle: float = 25
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
-@export_range(0.0, 1.0, 0.01) var opacity: float = 0.2
+@export_range(0.0, 1.0, 0.01) var opacity: float = 0.1
 
 
 var _cone_mesh: MeshInstance3D = null

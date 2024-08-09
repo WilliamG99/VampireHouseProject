@@ -1,14 +1,14 @@
 extends Node3D
 
 @onready var lightning_node = $LightningEffect
-@onready var lightning_timer = $LightningTimer
-@onready var lightning_length_timer = $LightningLengthTimer
+@onready var lightning_timer = $"../LightningTimer"
+@onready var lightning_length_timer = $"../LightningLengthTimer"
 
 # Get sounds FX refference
 @onready var thunder = $Thunder
 
-const TIMER_MAX := 5
-const TIMER_MIN := 1
+const TIMER_MAX := 6
+const TIMER_MIN := 3
 
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 	remove_child(lightning_node)
 
 
-func _on_timer_timeout():
+func _on_lightning_timer_timeout():
 	add_child(lightning_node)
 	
 	# Starts lightning length timer here

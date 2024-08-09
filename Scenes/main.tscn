@@ -146,7 +146,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -10, 1)
 
 [node name="LightNode2" parent="." instance=ExtResource("2_f1ajo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -31)
-length = 13.0
 
 [node name="LightSwitch" parent="LightNode2" instance=ExtResource("5_47pis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, 31)

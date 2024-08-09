@@ -27,7 +27,7 @@ extends RigidBody3D
 var SPEED := 2250.0
 const LERP_VAL := 0.3
 const DESIRED_LIGHT_STATE := false
-const AIM_DIR_Y := Vector3(0,5,0)
+const AIM_DIR_Y := Vector3(0,0,0)
 const THROW_SPEED := 3000
 
 var direction : Vector3

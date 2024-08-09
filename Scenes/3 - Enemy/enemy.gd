@@ -23,7 +23,7 @@ extends RigidBody3D
 @onready var walk_cycle = $Audio/WalkCycle
 
 	
-const SPEED = 1500.0
+const SPEED = 0.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
 const AIM_DIR_Y := Vector3(0,0,0)
