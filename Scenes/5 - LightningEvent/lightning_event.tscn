@@ -17,7 +17,6 @@ points = PackedVector3Array(-2.1, -2.7, -15, 2.1, -2.7, -15, -2.1, -2.7, 15, -2.
 script = ExtResource("1_oe2c5")
 
 [node name="LightningEffect" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LightningBoxArea" type="Area3D" parent="LightningEffect"]
 collision_layer = 0
@@ -47,6 +46,7 @@ spot_angle_attenuation = 1e-05
 
 [node name="Thunder" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_pug4e")
+volume_db = -10.0
 max_distance = 35.0
 bus = &"SFX"
 

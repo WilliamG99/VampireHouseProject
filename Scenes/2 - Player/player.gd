@@ -123,7 +123,10 @@ func _physics_process(delta) -> void:
 			holding_prop = false
 			locking_on = false
 			SPEED = 2250.0
-			aim_dir = (lock_on_node.global_position - global_position).normalized()
+			if lock_on_node:
+				aim_dir = (lock_on_node.global_position - global_position).normalized()
+			else:
+				aim_dir = -mesh.global_transform.basis.z
 			prop_interact.prop_aim_direction = aim_dir
 			prop_interact.prop_aim_direction_y = Vector3(0,0,0)
 			prop_interact.prop_throw_speed = THROW_SPEED * delta

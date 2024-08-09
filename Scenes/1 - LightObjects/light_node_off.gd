@@ -22,6 +22,9 @@ func get_falloff() -> float:
 func get_opacity() -> float:
 	return opacity
 
+func turn_on_lights() -> void:
+	if !has_node("LightSource"):
+		add_child(light_source)
 
 func _on_light_switch_body_entered(body : RigidBody3D):
 	if body.has_method("get_desired_light_state"):

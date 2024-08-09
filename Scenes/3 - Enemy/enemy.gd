@@ -22,8 +22,9 @@ extends RigidBody3D
 # Walk cycle timer
 @onready var walk_cycle = $Audio/WalkCycle
 
-	
-const SPEED = 0.0
+var frankAwake := false
+
+const SPEED = 2000.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
 const AIM_DIR_Y := Vector3(0,0,0)
@@ -44,6 +45,9 @@ var next_location : Vector3
 var direction : Vector3
 
 
+func set_frank_awake() -> void:
+	frankAwake = true
+
 func get_desired_light_state() -> bool:
 	return DESIRED_LIGHT_STATE
 
@@ -54,57 +58,58 @@ func update_target_location(target_location) -> void:
 
 
 func _physics_process(delta) -> void:
-	update_target_location(player.global_position)
-	current_location = global_transform.origin
-	next_location = nav_agent.get_next_path_position()
-	direction = (next_location - current_location).normalized()
-	direction.y = 0
+	if frankAwake:
+		update_target_location(player.global_position)
+		current_location = global_transform.origin
+		next_location = nav_agent.get_next_path_position()
+		direction = (next_location - current_location).normalized()
+		direction.y = 0
 
-	rotation.y = lerp_angle(rotation.y, (atan2(-direction.x, -direction.z)), LERP_VAL)
-	#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
-	
-	apply_central_force(direction * SPEED * delta)
-	if SPEED > 0.0:
-		anim_tree.set("parameters/isRunning/transition_request", "true")
-		if walk_cycle.time_left <= 0:
-			var i = randi_range(0, 5)
-			ary_wood_walking_sounds[i].pitch_scale = 0.8
-			ary_wood_walking_sounds[i].play()
-			walk_cycle.start(0.3)
-			
-	elif SPEED == 0.0:
-		anim_tree.set("parameters/isRunning/transition_request", "false")
-	
-	# Prop Interaction
-	# enemy has two timers, one for next prop pickup time and other for time till throw after pickup
-	if near_prop and !holding_prop and !pick_up_timer_on:
-		anim_tree.set("parameters/isHolding/transition_request", "true")
-		holding_prop = true
-		throw_timer_on = true
-		throw_timer.start()
-	
-	if holding_prop:
-		prop_interact.is_near = near_prop
-		prop_interact.is_holding = holding_prop
-		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
-		prop_interact.prop_position = hand.global_position
-		prop_interact.target_location = player_location
+		rotation.y = lerp_angle(rotation.y, (atan2(-direction.x, -direction.z)), LERP_VAL)
+		#mesh.rotation.y = lerp_angle(mesh.rotation.y, (atan2(-direction.x * 1200.0, -direction.z * 1200.0)), LERP_VAL)
 		
-		prop_node.pick_up(prop_interact)
+		apply_central_force(direction * SPEED * delta)
+		if SPEED > 0.0:
+			anim_tree.set("parameters/isRunning/transition_request", "true")
+			if walk_cycle.time_left <= 0:
+				var i = randi_range(0, 5)
+				ary_wood_walking_sounds[i].pitch_scale = 0.8
+				ary_wood_walking_sounds[i].play()
+				walk_cycle.start(0.3)
+				
+		elif SPEED == 0.0:
+			anim_tree.set("parameters/isRunning/transition_request", "false")
 		
-		if !throw_timer_on:
-			holding_prop = false
-			pick_up_timer_on = true
-			pick_up_timer.start()
+		# Prop Interaction
+		# enemy has two timers, one for next prop pickup time and other for time till throw after pickup
+		if near_prop and !holding_prop and !pick_up_timer_on:
+			anim_tree.set("parameters/isHolding/transition_request", "true")
+			holding_prop = true
+			throw_timer_on = true
+			throw_timer.start()
+		
+		if holding_prop:
+			prop_interact.is_near = near_prop
+			prop_interact.is_holding = holding_prop
+			prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
+			prop_interact.prop_position = hand.global_position
+			prop_interact.target_location = player_location
 			
-			anim_tree.set("parameters/isHolding/transition_request", "false")
+			prop_node.get_parent().pick_up(prop_interact)
 			
-			aim_dir = -mesh.global_transform.basis.z
-			prop_interact.prop_aim_direction = aim_dir
-			prop_interact.prop_aim_direction_y = AIM_DIR_Y
-			prop_interact.prop_throw_speed = THROW_SPEED * delta
-			
-			prop_node.throw(prop_interact)
+			if !throw_timer_on:
+				holding_prop = false
+				pick_up_timer_on = true
+				pick_up_timer.start()
+				
+				anim_tree.set("parameters/isHolding/transition_request", "false")
+				
+				aim_dir = -mesh.global_transform.basis.z
+				prop_interact.prop_aim_direction = aim_dir
+				prop_interact.prop_aim_direction_y = AIM_DIR_Y
+				prop_interact.prop_throw_speed = THROW_SPEED * delta
+				
+				prop_node.get_parent().throw(prop_interact)
 
 
 func frank_hit():
@@ -113,12 +118,17 @@ func frank_hit():
 
 # Prop Interaction Collison Signals
 func _on_prop_interact_area_body_entered(body) -> void:
-	if body.has_method("pick_up"):
+	if holding_prop:
+		return
+	elif body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = true
+		print(body)
 		prop_node = body
 
 func _on_prop_interact_area_body_exited(body) -> void:
-	if body.has_method("pick_up"):
+	if holding_prop:
+		return
+	elif body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = false
 		prop_node = null
 

@@ -59,3 +59,11 @@ func gameMenu():
 		Engine.time_scale = 1
 		# Hide the mouse
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+# Wake Frank
+func _on_frank_trigger_body_entered(body):
+	if body.name == "Player":
+		$Enemy.set_frank_awake()
+		
+		get_tree().call_group("Lights", "turn_on_lights")
+		

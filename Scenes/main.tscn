@@ -384,5 +384,4 @@ shape = SubResource("ConcavePolygonShape3D_hs8ks")
 [connection signal="body_entered" from="LightNode/LightSwitch" to="LightNode" method="_on_light_switch_body_entered"]
 [connection signal="body_entered" from="LightNode2/LightSwitch" to="LightNode2" method="_on_light_switch_body_entered"]
 [connection signal="body_entered" from="LightNode3/LightSwitch" to="LightNode3" method="_on_light_switch_body_entered"]
-[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="resume" from="UI/GameMenu" to="." method="_on_game_menu_resume"]
