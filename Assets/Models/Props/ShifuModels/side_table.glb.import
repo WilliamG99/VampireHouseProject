@@ -34,9 +34,9 @@ _subresources={
 "PATH:side_table": {
 "generate/physics": true,
 "physics/body_type": 1,
-"physics/layer": 8,
+"physics/layer": 9,
 "physics/mask": 15,
-"physics/shape_type": 1
+"physics/shape_type": 2
 }
 }
 }
