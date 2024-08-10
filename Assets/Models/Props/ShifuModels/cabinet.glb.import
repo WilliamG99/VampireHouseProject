@@ -30,6 +30,12 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
+"materials": {
+"@MATERIAL:0": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/WoodMaterial.tres"
+}
+},
 "nodes": {
 "PATH:cabinet": {
 "decomposition/precision": 1,
