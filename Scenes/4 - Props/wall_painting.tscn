@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://276eblap8bmf"]
+
+[ext_resource type="PackedScene" uid="uid://nh86uy3oxg7n" path="res://Assets/Models/Props/ShifuModels/wall_painting.glb" id="1_f3o31"]
+[ext_resource type="Texture2D" uid="uid://cu61xq6kkf7mw" path="res://Assets/Models/Props/ShifuModels/textures/wall_painting_diffuse.png" id="2_ol57t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwggc"]
+albedo_texture = ExtResource("2_ol57t")
+
+[node name="wall_painting" instance=ExtResource("1_f3o31")]
+
+[node name="painting" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_xwggc")
