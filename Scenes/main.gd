@@ -5,12 +5,14 @@ extends Node3D
 @onready var spring_arm_pivot = $Player/SpringArmPivot
 @onready var enemy = $Enemy
 @onready var game_menu = $UI/GameMenu
+@onready var game_won_area = $GameWon
 
 
 # Game paused state
 var is_game_paused := false
 
 func _ready():
+	remove_child(game_won_area)
 	# Make sure the game is unpaused
 	Engine.time_scale = 1
 	# Hide the game menu and the cursor at the start of the scene
@@ -62,6 +64,12 @@ func gameMenu():
 func _on_frank_trigger_body_entered(body):
 	if body.name == "Player":
 		$Enemy.set_frank_awake()
-		
 		get_tree().call_group("Lights", "turn_on_lights")
-		
+		add_child(game_won_area)
+
+
+func _on_game_won_body_entered(body):
+	if body.name == "Player":
+		print("GAME WON!")
+		get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/game_won.tscn")
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

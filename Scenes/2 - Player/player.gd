@@ -178,8 +178,6 @@ func _on_body_entered(body):
 	print(body)
 	if body.name == "Enemy":
 		game_over()
-	if body.name == "Node":
-		print("HIT")
 
 
 func in_light():

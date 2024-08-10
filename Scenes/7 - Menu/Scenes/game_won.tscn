@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc3vl3m5730ra"]
+[gd_scene load_steps=6 format=3 uid="uid://dc3vl3m5730ra"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_v0jkh"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_cr0rg"]
+[ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/game_won.gd" id="2_gunus"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="3_jc8qe"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="4_1wpfe"]
 
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_v0jkh")
+script = ExtResource("2_gunus")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -51,21 +53,36 @@ theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("2_cr0rg")
 theme_override_font_sizes/font_size = 120
-text = "GAME OVER"
+text = "GG EZ
+You're the ultimate vampire kid"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HorizontalAlligment" type="HBoxContainer" parent="Padding"]
+[node name="HorizontalAlligment" type="HBoxContainer" parent="Padding/VerticalAllignment"]
 layout_mode = 2
 alignment = 1
 
-[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/HorizontalAlligment"]
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/VerticalAllignment/HorizontalAlligment"]
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="Line Break" type="Control" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+[node name="Line Break" type="Control" parent="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment"]
 layout_mode = 2
+
+[node name="ButtonReturn" type="Button" parent="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cr0rg")
+theme_override_font_sizes/font_size = 82
+text = "Main Menu"
+flat = true
+
+[node name="ButtonExit" type="Button" parent="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cr0rg")
+theme_override_font_sizes/font_size = 82
+text = "Exit"
+flat = true
 
 [node name="Audio" type="Node" parent="."]
 
@@ -81,4 +98,8 @@ volume_db = -11.9
 pitch_scale = 1.32
 bus = &"SFX"
 
+[connection signal="mouse_entered" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonReturn" to="." method="_on_button_return_mouse_entered"]
+[connection signal="pressed" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonReturn" to="." method="_on_button_return_pressed"]
+[connection signal="mouse_entered" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonExit" to="." method="_on_button_exit_mouse_entered"]
+[connection signal="pressed" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonExit" to="." method="_on_button_exit_pressed"]
 [connection signal="finished" from="Audio/Click" to="." method="_on_click_finished"]
