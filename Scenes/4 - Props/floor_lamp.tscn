@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc0pavb13d8cp"]
+
+[ext_resource type="PackedScene" uid="uid://dkgfktiw1l54u" path="res://Assets/Models/Props/ShifuModels/floor_lamp.glb" id="1_4xhsi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5epcq"]
+emission_enabled = true
+emission = Color(1, 0.924167, 0.65, 1)
+
+[node name="floor_lamp2" instance=ExtResource("1_4xhsi")]
+
+[node name="floor_lamp_bulbs" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_5epcq")
