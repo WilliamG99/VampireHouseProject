@@ -3,10 +3,18 @@ extends Control
 # Get button SFX references
 @onready var click = $Audio/Click
 @onready var select = $Audio/Select
+@onready var label = %Label
+
+@onready var global_vars = get_node("/root/Global")
 
 # When click sound finishes, look according to bools what action to do
 var return_to_title = false
 var exit = false
+
+func _ready():
+	var min = int(global_vars._get_total_time_seconds() / 60)
+	var sec = global_vars._get_total_time_seconds() - min * 60
+	label.text = "Time: %02d:%02d" % [min,sec]
 
 func _on_button_return_pressed():
 	# Play SFX

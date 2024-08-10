@@ -71,5 +71,6 @@ func _on_frank_trigger_body_entered(body):
 func _on_game_won_body_entered(body):
 	if body.name == "Player":
 		print("GAME WON!")
+		$OnScreenTimer.set_global_time()
 		get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/game_won.tscn")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
