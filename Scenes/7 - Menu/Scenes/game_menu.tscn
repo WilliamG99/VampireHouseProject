@@ -88,7 +88,7 @@ flat = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_y3cm5")
 theme_override_font_sizes/font_size = 82
-text = "Exit to desktop
+text = "Quit to desktop
 "
 flat = true
 
