@@ -178,7 +178,6 @@ func _on_body_entered(body):
 	if body.name == "Enemy":
 		game_over()
 
-
 func in_light():
 	print("Inlight")
 	SPEED = 625

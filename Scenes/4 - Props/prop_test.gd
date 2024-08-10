@@ -9,6 +9,13 @@ extends Node
 # Get timer reference
 @onready var timer = $Timer
 var play_sound = false
+var thrown = false
+
+func get_thrown():
+	return thrown
+
+func set_thrown(b : bool):
+	thrown = b
 
 func _ready():
 	prop.body_entered.connect(_on_body_entered)
@@ -35,6 +42,7 @@ func throw(prop_interact):
 	prop.apply_central_impulse((prop_interact.prop_aim_direction * prop_interact.prop_throw_speed) + prop_interact.prop_aim_direction_y)
 	#print((prop_interact.prop_aim_direction * prop_interact.prop_throw_speed) + prop_interact.prop_aim_direction_y)
 	prop.collision_mask = 15
+	thrown = true
 
 func _on_body_entered(body):
 	print(body)

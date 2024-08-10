@@ -6,7 +6,8 @@ extends Node3D
 @onready var enemy = $Enemy
 @onready var game_menu = $UI/GameMenu
 @onready var game_won_area = $GameWon
-@onready var music = $Audio/Music
+@onready var sneak_music = $Audio/SneakMusic
+@onready var chase_music = $Audio/ChaseMusic
 
 # Game paused state
 var is_game_paused := false
@@ -76,6 +77,15 @@ func _on_game_won_body_entered(body):
 		get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/game_won.tscn")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func _on_enemy_chase():
+	sneak_music.stop()
+	chase_music.play()
 
-func _on_music_finished():
-	music.play()
+
+func _on_chase_music_finished():
+	chase_music.play()
+
+
+func _on_sneak_music_finished():
+	sneak_music.play()
+	
