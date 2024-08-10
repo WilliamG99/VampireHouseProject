@@ -6,10 +6,21 @@ extends Node
 # Get prop node on import
 @onready var prop = $Node
 
+# Get timer reference
+@onready var timer = $Timer
+var play_sound = false
+
 func _ready():
 	prop.body_entered.connect(_on_body_entered)
 	prop.continuous_cd = true
 	prop.can_sleep = true
+	prop.max_contacts_reported = 300
+	prop.contact_monitor = true
+	
+func _process(delta):
+	hit.position = prop.position
+	if timer.time_left == 0:
+		play_sound = true
 
 func pick_up(prop_interact: Prop_Interact):
 	prop.freeze = true
@@ -33,6 +44,7 @@ func _on_body_entered(body):
 	#Hit Frank
 	if body.name == "Enemy":
 		body.frank_hit()
-		
-	hit.pitch_scale = randf_range(0.98, 1.02)
-	hit.play()
+	
+	if play_sound:	
+		hit.pitch_scale = randf_range(0.98, 1.02)
+		hit.play()

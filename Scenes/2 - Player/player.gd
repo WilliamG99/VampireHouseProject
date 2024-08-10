@@ -20,7 +20,6 @@ extends RigidBody3D
 	$Audio/WoodSteps/Step6,
 	]
 @onready var pickup = $Audio/Equip
-
 # Walk sound timer
 @onready var walk_cycle = $WalkCycle
 

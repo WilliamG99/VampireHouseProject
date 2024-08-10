@@ -9,6 +9,7 @@ extends RigidBody3D
 @onready var throw_timer = $ThrowTimer
 @onready var pick_up_timer = $PickUpTimer
 @onready var anim_tree = $frankenstein/AnimationTree
+@onready var hit = $Hit
 
 # Get sound refference
 @onready var ary_wood_walking_sounds = [
@@ -114,6 +115,7 @@ func _physics_process(delta) -> void:
 
 func frank_hit():
 	anim_tree.set("parameters/isHit/transition_request", "true")
+	hit.play()
 
 
 # Prop Interaction Collison Signals

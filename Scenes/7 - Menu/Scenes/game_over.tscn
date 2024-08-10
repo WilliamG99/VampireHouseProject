@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://gfng1i2dcvnq"]
+[gd_scene load_steps=7 format=3 uid="uid://gfng1i2dcvnq"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_16nqm"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="1_a0hu6"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="2_56hcn"]
 [ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/game_over.gd" id="2_yycwg"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="3_1tylt"]
+[ext_resource type="AudioStream" uid="uid://dtxju05news4x" path="res://Assets/Audio/SFX/game_over.mp3" id="6_ym3qo"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -80,14 +81,14 @@ flat = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_a0hu6")
 theme_override_font_sizes/font_size = 82
-text = "Return"
+text = "Return to Menu"
 flat = true
 
 [node name="ButtonExit" type="Button" parent="Padding/HorizontalAlligment/VerticalAllignment"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_a0hu6")
 theme_override_font_sizes/font_size = 82
-text = "Exit"
+text = "Quit"
 flat = true
 
 [node name="Audio" type="Node" parent="."]
@@ -103,6 +104,10 @@ stream = ExtResource("3_1tylt")
 volume_db = -11.9
 pitch_scale = 1.32
 bus = &"SFX"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_ym3qo")
+autoplay = true
 
 [connection signal="mouse_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonRetry" to="." method="_on_button_retry_mouse_entered"]
 [connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonRetry" to="." method="_on_button_retry_pressed"]

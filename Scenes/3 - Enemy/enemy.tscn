@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drqgscf3l2qpr"]
+[gd_scene load_steps=13 format=3 uid="uid://drqgscf3l2qpr"]
 
 [ext_resource type="Script" path="res://Scenes/3 - Enemy/enemy.gd" id="1_el7qd"]
 [ext_resource type="PackedScene" uid="uid://0wyeis1j5fvc" path="res://Scenes/3 - Enemy/frankenstein.tscn" id="2_ep4jc"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://sandu6hsgyvu" path="res://Assets/Audio/SFX/WoodRunning4.wav" id="6_bvrgu"]
 [ext_resource type="AudioStream" uid="uid://c6xbcpg5t136n" path="res://Assets/Audio/SFX/WoodRunning5.wav" id="7_8gwmi"]
 [ext_resource type="AudioStream" uid="uid://8gvj5wqgtdwc" path="res://Assets/Audio/SFX/WoodRunning6.wav" id="8_u6pls"]
+[ext_resource type="AudioStream" uid="uid://hv54eapnqrqr" path="res://Assets/Audio/SFX/punch.mp3" id="9_tv6vl"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_o1nge"]
 radius = 0.25
@@ -80,6 +81,10 @@ stream = ExtResource("7_8gwmi")
 
 [node name="Step6" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_u6pls")
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_tv6vl")
+bus = &"SFX"
 
 [connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
 [connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]

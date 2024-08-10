@@ -6,7 +6,7 @@ extends Node3D
 @onready var enemy = $Enemy
 @onready var game_menu = $UI/GameMenu
 @onready var game_won_area = $GameWon
-
+@onready var music = $Audio/Music
 
 # Game paused state
 var is_game_paused := false
@@ -21,6 +21,7 @@ func _ready():
 
 # When player chooses the resume option in game menu
 func _on_game_menu_resume():
+	print("MARIBOR")
 	# Start pause menu action
 	gameMenu()
 
@@ -74,3 +75,7 @@ func _on_game_won_body_entered(body):
 		$OnScreenTimer.set_global_time()
 		get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/game_won.tscn")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_music_finished():
+	music.play()

@@ -1,6 +1,8 @@
 extends Node3D
 
 @onready var light_source = $LightSource
+@onready var switch_sound = $SwitchSound
+@onready var light_switch = $LightSwitch
 
 @export var length: float = 13
 @export var angle: float = 25
@@ -11,6 +13,8 @@ var light_set_once : bool
 
 func _ready():
 	light_set_once = false
+	if light_switch:
+		switch_sound.position = light_switch.position
 
 func get_length() -> float:
 	return length
@@ -33,12 +37,16 @@ func _on_light_switch_body_entered(body : RigidBody3D):
 	if body.has_method("get_desired_light_state"):
 		if has_node("LightSource") and !body.get_desired_light_state():
 			remove_child(light_source)
+			switch_sound.play()
 			
 		elif !has_node("LightSource") and body.get_desired_light_state():
+			switch_sound.play()
 			add_child(light_source)
 	else:
 		if has_node("LightSource"):
+			switch_sound.play()
 			remove_child(light_source)
 			
 		elif !has_node("LightSource"):
+			switch_sound.play()
 			add_child(light_source)
