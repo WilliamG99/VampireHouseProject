@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blh56vilfseqi"]
+
+[ext_resource type="PackedScene" uid="uid://cl43ws5ks8bex" path="res://Assets/Models/Props/ShifuModels/LR_ceiling_light.glb" id="1_ahibk"]
+
+[node name="LR_ceiling_light" instance=ExtResource("1_ahibk")]
+
+[node name="light_glass" parent="." index="1"]
+transparency = 0.5
