@@ -29,7 +29,7 @@ func _on_click_finished():
 		# Start the game
 		print("start_menu.gd::10::START_BUTTON_PRESSED")
 		print("Starting the game.")
-		get_tree().change_scene_to_file("res://Scenes/main.tscn")		
+		get_tree().change_scene_to_file("res://Scenes/test_level.tscn")		
 	if quit_game:
 		# Close the window
 		print("start_menu.gd::35::QUIT_BUTTON_PRESSED")

@@ -169,7 +169,9 @@ func _on_prop_interact_area_body_exited(body) -> void:
 
 func game_over():
 	print("GAME OVER")
-	
+	get_tree().change_scene_to_file("res://Scenes/7 - Menu/Scenes/game_over.tscn")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 # Enemy Collision
 func _on_body_entered(body):
 	print("HIT!")

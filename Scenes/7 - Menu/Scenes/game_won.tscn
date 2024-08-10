@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc3vl3m5730ra"]
+
+[ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_v0jkh"]
+[ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_cr0rg"]
+[ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="3_jc8qe"]
+[ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="4_1wpfe"]
+
+[node name="GameWon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_v0jkh")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Padding" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Line Break" type="Control" parent="Padding/VerticalAllignment"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Padding/VerticalAllignment"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_cr0rg")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HorizontalAlligment" type="HBoxContainer" parent="Padding"]
+layout_mode = 2
+alignment = 1
+
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/HorizontalAlligment"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Line Break" type="Control" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+layout_mode = 2
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_jc8qe")
+volume_db = 5.843
+pitch_scale = 1.01
+bus = &"SFX"
+
+[node name="Select" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_1wpfe")
+volume_db = -11.9
+pitch_scale = 1.32
+bus = &"SFX"
+
+[connection signal="finished" from="Audio/Click" to="." method="_on_click_finished"]

@@ -6,8 +6,6 @@ extends Node3D
 @onready var enemy = $Enemy
 @onready var game_menu = $UI/GameMenu
 
-var near_pan := false
-var holding_pan := false
 
 # Game paused state
 var is_game_paused := false

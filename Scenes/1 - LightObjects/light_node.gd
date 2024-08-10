@@ -7,7 +7,10 @@ extends Node3D
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
 @export_range(0.0, 1.0, 0.01) var opacity: float = 0.1
 
-var light_set_once := false
+var light_set_once : bool
+
+func _ready():
+	light_set_once = false
 
 func get_length() -> float:
 	return length
