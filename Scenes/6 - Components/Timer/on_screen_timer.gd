@@ -14,7 +14,6 @@ func set_global_time():
 	global_vars._set_total_time_seconds(total_time_seconds)
 
 func _on_timer_timeout():
-	print(total_time_seconds)
 	total_time_seconds += 1
 	var min = int(total_time_seconds / 60)
 	var sec = total_time_seconds - min * 60

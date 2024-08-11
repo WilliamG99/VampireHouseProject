@@ -37,7 +37,8 @@ var direction : Vector3
 
 var near_prop := false
 var holding_prop := false
-var prop_node : RigidBody3D
+var prop_nodes = []
+var prop_node
 var aim_dir : Vector3
 
 var lock_on_node
@@ -71,6 +72,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		holding_prop = true
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "true")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "true")
+		
+		if !prop_nodes.front():
+			return
+		else:
+			prop_node = prop_nodes.front()
 	
 	# Trigger snack event and wakes frank
 	if in_snack_area and Input.is_action_just_pressed("interact"):
@@ -79,7 +85,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		$"..".add_child(game_won_area)
 		
 		# Trigger pop instructions
-		popup.text = """ RUN!!! """
+		popup.text = " RUN!!! "
 		popup.visible = true
 		popup_rect.visible = true
 		popup_timer.start(1.5)
@@ -111,7 +117,6 @@ func _physics_process(delta) -> void:
 		prop_interact.is_holding = holding_prop
 		prop_interact.prop_rotation_degrees_y = mesh.global_rotation_degrees.y
 		prop_interact.prop_position = hand.global_position
-		
 		prop_node.get_parent().pick_up(prop_interact)
 		
 		# Locking On
@@ -137,7 +142,7 @@ func _physics_process(delta) -> void:
 				prop_node.get_parent().throw(prop_interact)
 			elif prop_node.get_parent().get_parent().has_method("throw"):
 				prop_node.get_parent().get_parent().throw(prop_interact)
-			
+				
 		elif Input.is_action_just_pressed("throw") and locking_on:
 			holding_prop = false
 			locking_on = false
@@ -150,10 +155,10 @@ func _physics_process(delta) -> void:
 			prop_interact.prop_aim_direction_y = Vector3(0,0,0)
 			prop_interact.prop_throw_speed = THROW_SPEED * delta
 			prop_node.get_parent().throw(prop_interact)
-			
+
+
 	if holding_prop and locking_on and raycast.get_collider():
 		lock_on_node = raycast.get_collider().get_parent()
-		print(lock_on_node.name)
 		lock_on_node._is_locked_on()
 	elif holding_prop and (locking_on and !raycast.get_collider() or !locking_on and raycast.get_collider()):
 		if lock_on_node:
@@ -173,8 +178,8 @@ func _on_prop_interact_area_body_entered(body) -> void:
 		return
 	elif body.has_method("pick_up") or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		near_prop = true
-		print(body)
-		prop_node = body
+		prop_nodes.append(body)
+		print(prop_nodes)
 
 func _on_prop_interact_area_body_exited(body) -> void:
 	if holding_prop:
@@ -182,8 +187,13 @@ func _on_prop_interact_area_body_exited(body) -> void:
 	elif body.has_method("pick_up")  or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "false")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "false")
-		near_prop = false
-		prop_node = null
+		
+		if prop_nodes.is_empty():
+			near_prop = false
+			holding_prop = false
+		else:
+			prop_nodes.erase(body)
+		print(prop_nodes)
 
 
 func game_over():
@@ -194,7 +204,6 @@ func game_over():
 # Enemy Collision
 func _on_body_entered(body):
 	print("HIT!")
-	print(body)
 	if body.name == "Enemy":
 		game_over()
 
