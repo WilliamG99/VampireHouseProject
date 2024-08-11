@@ -4,9 +4,9 @@ extends Node3D
 @onready var switch_sound = $SwitchSound
 @onready var light_switch = $LightSwitch
 
-@onready var first_light_off_instructions := false
 @onready var popup = %PopupInstructions
 @onready var popup_timer = %InstructionTimer
+var first_light_off_instructions : bool
 
 @export var length: float = 13
 @export var angle: float = 25
@@ -16,6 +16,7 @@ extends Node3D
 var light_set_once : bool
 
 func _ready():
+	first_light_off_instructions = false
 	light_set_once = false
 	if light_switch:
 		switch_sound.position = light_switch.position
@@ -51,7 +52,7 @@ func _on_light_switch_body_entered(body : RigidBody3D):
 			switch_sound.play()
 			remove_child(light_source)
 			
-			if !first_light_off_instructions:
+			if !first_light_off_instructions and $".".name == "BedroomDoorLight":
 				first_light_off_instructions = true
 				popup.text = """ Nice one! 
 				Snacks are in the fridge

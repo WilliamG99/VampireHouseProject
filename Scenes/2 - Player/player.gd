@@ -79,12 +79,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		$"..".add_child(game_won_area)
 		
 		# Trigger pop instructions
-		popup.text = """ Snacks obtained...
-		But Frank heard you!
-		Get back to bed before you're caught!!!"""
+		popup.text = """ RUN!!! """
 		popup.visible = true
 		popup_rect.visible = true
-		popup_timer.start()
+		popup_timer.start(1.5)
 
 func get_desired_light_state() -> bool:
 	return DESIRED_LIGHT_STATE

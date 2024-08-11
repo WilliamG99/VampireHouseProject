@@ -106,14 +106,6 @@ func _on_instruction_timer_timeout():
 
 
 
-func _on_music_finished():
-	music.play()
-
-
-
-
-
-
 func _on_enemy_chase():
 	sneak_music.stop()
 	chase_music.play()
