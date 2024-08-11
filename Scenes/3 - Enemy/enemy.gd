@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+signal chase
 
 @onready var player = $"../Player"
 
@@ -48,6 +49,7 @@ var direction : Vector3
 
 func set_frank_awake() -> void:
 	frankAwake = true
+	chase.emit()
 
 func get_desired_light_state() -> bool:
 	return DESIRED_LIGHT_STATE

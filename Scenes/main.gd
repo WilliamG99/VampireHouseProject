@@ -6,7 +6,9 @@ extends Node3D
 @onready var enemy = $Enemy
 @onready var game_menu = $UI/GameMenu
 @onready var game_won_area = $GameWon
-@onready var music = $Audio/Music
+@onready var sneak_music = $Audio/SneakMusic
+@onready var chase_music = $Audio/ChaseMusic
+
 @onready var popup = %PopupInstructions
 @onready var popup_rect = %ColorRect
 
@@ -112,3 +114,15 @@ func _on_music_finished():
 
 
 
+func _on_enemy_chase():
+	sneak_music.stop()
+	chase_music.play()
+
+
+func _on_chase_music_finished():
+	chase_music.play()
+
+
+func _on_sneak_music_finished():
+	sneak_music.play()
+	
