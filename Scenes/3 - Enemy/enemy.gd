@@ -26,7 +26,7 @@ signal chase
 
 var frankAwake := false
 
-const SPEED = 2000.0
+const SPEED = 2050.0
 const LERP_VAL := 0.1
 const DESIRED_LIGHT_STATE := true
 const AIM_DIR_Y := Vector3(0,0,0)
@@ -129,6 +129,7 @@ func _on_prop_interact_area_body_entered(body) -> void:
 		print(body)
 		prop_node = body
 		set_frank_awake()
+		get_tree().call_group("Lights", "turn_on_lights")
 
 func _on_prop_interact_area_body_exited(body) -> void:
 	if holding_prop:

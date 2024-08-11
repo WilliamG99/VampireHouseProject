@@ -217,7 +217,7 @@ func _on_body_entered(body):
 
 func in_light():
 	print("Inlight")
-	SPEED = 625
+	SPEED = 1000.0
 
 func out_light():
 	print("Out of light")
