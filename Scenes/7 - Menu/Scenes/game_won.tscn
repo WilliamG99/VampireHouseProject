@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc3vl3m5730ra"]
+[gd_scene load_steps=8 format=3 uid="uid://dc3vl3m5730ra"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_v0jkh"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_cr0rg"]
 [ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/game_won.gd" id="2_gunus"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="3_jc8qe"]
+[ext_resource type="Texture2D" uid="uid://cyp1dhm3xm4bl" path="res://Assets/Images/victory_screen.png" id="3_umg8t"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="4_1wpfe"]
 [ext_resource type="AudioStream" uid="uid://cfkg8ipvdj88l" path="res://Assets/Audio/Music/victory.mp3" id="6_xfk63"]
 
@@ -17,14 +18,11 @@ grow_vertical = 2
 theme = ExtResource("1_v0jkh")
 script = ExtResource("2_gunus")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.196078, 0.196078, 0.196078, 1)
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_umg8t")
 
 [node name="Padding" type="MarginContainer" parent="."]
 layout_mode = 1
