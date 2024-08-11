@@ -15,6 +15,8 @@ extends Node3D
 # Game paused state
 var is_game_paused := false
 
+var is_chasing = false
+
 # Fridge snack event area
 var snacks_area := false
 
@@ -107,8 +109,10 @@ func _on_instruction_timer_timeout():
 
 
 func _on_enemy_chase():
-	sneak_music.stop()
-	chase_music.play()
+	if !is_chasing:
+		sneak_music.stop()
+		chase_music.play()
+	is_chasing = true
 
 
 func _on_chase_music_finished():
