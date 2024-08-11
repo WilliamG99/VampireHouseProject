@@ -1,0 +1,285 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxj3522yamrk"]
+
+[ext_resource type="Texture2D" uid="uid://ukn5f4w0nmrr" path="res://Assets/Images/title_screen.png" id="1_3e2id"]
+[ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/credits.gd" id="1_m8n4k"]
+[ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_dkocv"]
+[ext_resource type="LabelSettings" uid="uid://dv8mtk6elvjb2" path="res://Assets/Fonts/Styles/label-large.tres" id="3_r705u"]
+[ext_resource type="LabelSettings" uid="uid://bojgn66ut1fxj" path="res://Assets/Fonts/Styles/label-medium.tres" id="4_3lthd"]
+[ext_resource type="LabelSettings" uid="uid://cqmy7smmylkpu" path="res://Assets/Fonts/Styles/label-small.tres" id="5_nrltp"]
+[ext_resource type="Theme" uid="uid://dy2shwb78l1s1" path="res://Assets/Fonts/Styles/button.tres" id="6_1s6o2"]
+[ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="8_iifpa"]
+[ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="9_25o5s"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m8n4k")
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3e2id")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0145833
+anchor_top = -0.0259259
+anchor_right = 1.02969
+anchor_bottom = 1.04907
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.788235)
+metadata/_edit_use_anchors_ = true
+
+[node name="Padding" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Padding"]
+layout_mode = 2
+alignment = 1
+
+[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -4
+alignment = 1
+
+[node name="Title" type="Label" parent="Padding/HBoxContainer/VerticalAllignment"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 120
+text = "Credits
+"
+label_settings = ExtResource("3_r705u")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Line Break" type="Control" parent="Padding/HBoxContainer/VerticalAllignment"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Padding/HBoxContainer/VerticalAllignment"]
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="MainCredits" type="VBoxContainer" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer"]
+layout_mode = 2
+
+[node name="Programming" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "PROGRAMMING"
+label_settings = ExtResource("4_3lthd")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Names1" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "John doe
+john doe"
+label_settings = ExtResource("5_nrltp")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Line Break2" type="Control" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="Art" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "ART
+"
+label_settings = ExtResource("4_3lthd")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Names2" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "John doe
+john doe"
+label_settings = ExtResource("5_nrltp")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Line Break3" type="Control" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="Sound" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "Audio
+"
+label_settings = ExtResource("4_3lthd")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Names3" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "John doe"
+label_settings = ExtResource("5_nrltp")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Line Break4" type="Control" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="MainCredits2" type="VBoxContainer" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer"]
+layout_mode = 2
+
+[node name="Programming" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "ADDITIONAL
+"
+label_settings = ExtResource("4_3lthd")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Names1" type="Label" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
+theme_override_constants/shadow_offset_x = 17
+theme_override_constants/shadow_offset_y = 40
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 30
+text = "Pixabay.com (AUDIO)
+dafont.com (font)
+poly.pizza (models)
+"
+label_settings = ExtResource("5_nrltp")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Line Break2" type="Control" parent="Padding/HBoxContainer/VerticalAllignment/HBoxContainer/MainCredits2"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="ButtonQuit" type="Button" parent="Padding/HBoxContainer/VerticalAllignment"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_1s6o2")
+theme_override_fonts/font = ExtResource("2_dkocv")
+theme_override_font_sizes/font_size = 82
+text = "Return
+"
+flat = true
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("8_iifpa")
+volume_db = 5.843
+pitch_scale = 1.01
+bus = &"SFX"
+
+[node name="Select" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("9_25o5s")
+volume_db = -11.9
+pitch_scale = 1.32
+bus = &"SFX"
+
+[connection signal="pressed" from="Padding/HBoxContainer/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[connection signal="finished" from="Audio/Click" to="." method="_on_click_finished"]

@@ -6,8 +6,15 @@ extends Control
 @onready var click = $Audio/Click
 @onready var select = $Audio/Select
 
+# Get credits reference
+@onready var credits = $Credits
+
 var start_game = false
 var quit_game = false
+var goto_credits = false
+
+func _ready():
+	credits.visible = false
 
 func _on_button_start_pressed():
 	# Play SFX
@@ -35,6 +42,9 @@ func _on_click_finished():
 		print("start_menu.gd::35::QUIT_BUTTON_PRESSED")
 		print("Closing the game.")
 		get_tree().quit()
+	if goto_credits:
+		credits.visible = true
+		goto_credits = false
 		
 
 # ************************
@@ -51,5 +61,19 @@ func _on_button_start_mouse_entered():
 	select.play()
 
 func _on_button_quit_mouse_entered():
+	# Play SFX
+	select.play()
+
+
+func _on_credits_return_from_credits():
+	credits.visible = false
+
+
+func _on_button_credits_pressed():
+	click.play()
+	goto_credits = true
+
+
+func _on_button_credits_mouse_entered():
 	# Play SFX
 	select.play()

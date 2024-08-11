@@ -1,0 +1,12 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cqmy7smmylkpu"]
+
+[ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="1_b51dm"]
+
+[resource]
+font = ExtResource("1_b51dm")
+font_size = 60
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 50
+shadow_color = Color(0, 0, 0, 0.207843)
+shadow_offset = Vector2(25, 30)
