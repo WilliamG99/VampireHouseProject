@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://btdhwtdbt0oas"]
+
+[ext_resource type="Script" path="res://Scenes/2 - Player/player.gd" id="1_3jjk2"]
+[ext_resource type="AudioStream" uid="uid://cpancows1xwqp" path="res://Assets/Audio/SFX/throw.mp3" id="2_7evc4"]
+[ext_resource type="PackedScene" uid="uid://dmpvoayojf43o" path="res://Scenes/2 - Player/vampire_kid.tscn" id="2_pojsg"]
+[ext_resource type="AudioStream" uid="uid://b0t53pcbo83v1" path="res://Assets/Audio/SFX/WoodRunning1.wav" id="4_ytyx3"]
+[ext_resource type="AudioStream" uid="uid://jtdgwsir3n26" path="res://Assets/Audio/SFX/WoodRunning2.wav" id="5_08o4p"]
+[ext_resource type="AudioStream" uid="uid://cwpg08p145qd3" path="res://Assets/Audio/SFX/Woodrunning3.wav" id="6_0h5g8"]
+[ext_resource type="AudioStream" uid="uid://b8eg4xwyhyowp" path="res://Assets/Audio/SFX/Wood4.wav" id="7_yt8dl"]
+[ext_resource type="AudioStream" uid="uid://c6xbcpg5t136n" path="res://Assets/Audio/SFX/WoodRunning5.wav" id="8_5doas"]
+[ext_resource type="AudioStream" uid="uid://8gvj5wqgtdwc" path="res://Assets/Audio/SFX/WoodRunning6.wav" id="9_noipm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8uogg"]
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_amaii"]
+radius = 0.65
+height = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uoyt3"]
+radius = 4.0
+
+[node name="Player" type="RigidBody3D"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 15
+mass = 0.8
+lock_rotation = true
+continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.5
+script = ExtResource("1_3jjk2")
+
+[node name="VampireKid" parent="." instance=ExtResource("2_pojsg")]
+
+[node name="PlayerHand" type="Node3D" parent="VampireKid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49692e-07, 2, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VampireKid/PlayerHand"]
+mesh = SubResource("SphereMesh_8uogg")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("CapsuleShape3D_amaii")
+
+[node name="PropInteractArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PropInteractArea"]
+shape = SubResource("SphereShape3D_uoyt3")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Throw" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_7evc4")
+volume_db = -7.0
+bus = &"SFX"
+
+[node name="Equip" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_7evc4")
+pitch_scale = 3.0
+
+[node name="WoodSteps" type="Node" parent="Audio"]
+
+[node name="Step1" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("4_ytyx3")
+
+[node name="Step2" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("5_08o4p")
+
+[node name="Step3" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("6_0h5g8")
+
+[node name="Step4" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("7_yt8dl")
+
+[node name="Step5" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("8_5doas")
+
+[node name="Step6" type="AudioStreamPlayer" parent="Audio/WoodSteps"]
+stream = ExtResource("9_noipm")
+
+[node name="WalkCycle" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Camera" type="Node3D" parent="."]
+
+[node name="SpringArmPivot" type="Node3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera/SpringArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="Camera/SpringArmPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
+near = 0.3
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera/SpringArmPivot/SpringArm3D/Camera3D"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 16
+collide_with_bodies = false
+debug_shape_thickness = 5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="PropInteractArea" to="." method="_on_prop_interact_area_body_entered"]
+[connection signal="body_exited" from="PropInteractArea" to="." method="_on_prop_interact_area_body_exited"]
