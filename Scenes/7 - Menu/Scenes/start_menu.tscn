@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhpj4bcxbf7t5"]
+[gd_scene load_steps=10 format=3 uid="uid://bhpj4bcxbf7t5"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_a8ds3"]
 [ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/start_menu.gd" id="2_vtxti"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="3_3dc5p"]
+[ext_resource type="Texture2D" uid="uid://ukn5f4w0nmrr" path="res://Assets/Images/title_screen.png" id="3_ld8ge"]
 [ext_resource type="AudioStream" uid="uid://tit5ly7w62g5" path="res://Assets/Audio/Music/Start Menu Theme.mp3" id="4_j86rs"]
+[ext_resource type="LabelSettings" uid="uid://dv8mtk6elvjb2" path="res://Assets/Fonts/Styles/new_label_settings.tres" id="5_0p84o"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="5_6gohf"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="6_l5yxv"]
+[ext_resource type="Theme" uid="uid://dy2shwb78l1s1" path="res://Assets/Fonts/Styles/button.tres" id="6_n2ath"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -19,20 +22,22 @@ grow_vertical = 2
 theme = ExtResource("1_a8ds3")
 script = ExtResource("2_vtxti")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.196078, 0.196078, 0.196078, 1)
+texture = ExtResource("3_ld8ge")
 
 [node name="Padding" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 79.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
@@ -42,13 +47,14 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VerticalAllignment" type="VBoxContainer" parent="Padding"]
 layout_mode = 2
-theme_override_constants/separation = 60
-
-[node name="Line Break" type="Control" parent="Padding/VerticalAllignment"]
-layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = -4
+alignment = 2
 
 [node name="Title" type="Label" parent="Padding/VerticalAllignment"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.298039)
 theme_override_constants/shadow_offset_x = 17
 theme_override_constants/shadow_offset_y = 40
@@ -56,31 +62,30 @@ theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_3dc5p")
 theme_override_font_sizes/font_size = 120
-text = "Vampire House"
+text = "Lights Out
+"
+label_settings = ExtResource("5_0p84o")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
-[node name="HorizontalAlligment" type="HBoxContainer" parent="Padding"]
-layout_mode = 2
-alignment = 1
-
-[node name="VerticalAllignment" type="VBoxContainer" parent="Padding/HorizontalAlligment"]
-layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
-
-[node name="Line Break" type="Control" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+[node name="Line Break" type="Control" parent="Padding/VerticalAllignment"]
+custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 
-[node name="ButtonStart" type="Button" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+[node name="ButtonStart" type="Button" parent="Padding/VerticalAllignment"]
 layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_n2ath")
 theme_override_fonts/font = ExtResource("3_3dc5p")
 theme_override_font_sizes/font_size = 82
 text = "Start"
 flat = true
 
-[node name="ButtonQuit" type="Button" parent="Padding/HorizontalAlligment/VerticalAllignment"]
+[node name="ButtonQuit" type="Button" parent="Padding/VerticalAllignment"]
 layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_n2ath")
 theme_override_fonts/font = ExtResource("3_3dc5p")
 theme_override_font_sizes/font_size = 82
 text = "Quit
@@ -107,10 +112,10 @@ volume_db = -11.9
 pitch_scale = 1.32
 bus = &"SFX"
 
-[connection signal="focus_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_focus_entered"]
-[connection signal="mouse_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_mouse_entered"]
-[connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonStart" to="." method="_on_button_start_pressed"]
-[connection signal="mouse_entered" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_mouse_entered"]
-[connection signal="pressed" from="Padding/HorizontalAlligment/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[connection signal="focus_entered" from="Padding/VerticalAllignment/ButtonStart" to="." method="_on_button_start_focus_entered"]
+[connection signal="mouse_entered" from="Padding/VerticalAllignment/ButtonStart" to="." method="_on_button_start_mouse_entered"]
+[connection signal="pressed" from="Padding/VerticalAllignment/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="mouse_entered" from="Padding/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_mouse_entered"]
+[connection signal="pressed" from="Padding/VerticalAllignment/ButtonQuit" to="." method="_on_button_quit_pressed"]
 [connection signal="finished" from="Audio/Music" to="." method="_on_music_finished"]
 [connection signal="finished" from="Audio/Click" to="." method="_on_click_finished"]
