@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxj3522yamrk"]
+[gd_scene load_steps=9 format=3 uid="uid://feck1jxpfcq2"]
 
 [ext_resource type="Texture2D" uid="uid://ukn5f4w0nmrr" path="res://Assets/Images/title_screen.png" id="1_3e2id"]
 [ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/credits.gd" id="1_m8n4k"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_dkocv"]
-[ext_resource type="LabelSettings" uid="uid://dv8mtk6elvjb2" path="res://Assets/Fonts/Styles/label-large.tres" id="3_r705u"]
-[ext_resource type="LabelSettings" uid="uid://bojgn66ut1fxj" path="res://Assets/Fonts/Styles/label-medium.tres" id="4_3lthd"]
-[ext_resource type="LabelSettings" uid="uid://cqmy7smmylkpu" path="res://Assets/Fonts/Styles/label-small.tres" id="5_nrltp"]
+[ext_resource type="LabelSettings" path="res://Assets/Fonts/Styles/label-medium.tres" id="4_3lthd"]
+[ext_resource type="LabelSettings" path="res://Assets/Fonts/Styles/label-small.tres" id="5_nrltp"]
 [ext_resource type="Theme" uid="uid://dy2shwb78l1s1" path="res://Assets/Fonts/Styles/button.tres" id="6_1s6o2"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="8_iifpa"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="9_25o5s"]
@@ -78,7 +77,6 @@ theme_override_fonts/font = ExtResource("2_dkocv")
 theme_override_font_sizes/font_size = 120
 text = "Credits
 "
-label_settings = ExtResource("3_r705u")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -162,7 +160,7 @@ theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("2_dkocv")
 theme_override_font_sizes/font_size = 30
-text = "Kirsten Schow
+text = "Kirsten Schow 3D
 "
 label_settings = ExtResource("5_nrltp")
 horizontal_alignment = 1

@@ -11,6 +11,7 @@ extends RigidBody3D
 @onready var popup = %PopupInstructions
 @onready var popup_timer = %InstructionTimer
 @onready var popup_rect = %ColorRect
+@onready var jump_timer = $JumpTimer
 
 
 # Get audio references
@@ -45,6 +46,8 @@ var lock_on_node
 var locking_on := false
 
 var in_snack_area := false
+
+var is_jumping := false
 
 var prop_interact = Prop_Interact.new()
 
@@ -100,7 +103,12 @@ func _physics_process(delta) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
-
+	
+	if Input.is_action_just_pressed("jump") and !is_jumping:
+		is_jumping = true
+		print("jump")
+		jump_timer.start()
+		apply_central_impulse(Vector3(0,6,0))
 	
 	if direction:
 		if walk_cycle.time_left <= 0:
@@ -227,3 +235,8 @@ func out_lightning():
 # Bedroom Reached - Game Won
 func bedroom_reached():
 	print("GAME END")
+
+# Jump
+func _on_jump_timer_timeout():
+	print("Timer done")
+	is_jumping = false
