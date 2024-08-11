@@ -19,7 +19,9 @@ func set_thrown(b : bool):
 
 # First time picking up basketball to trigger instructios
 @onready var basketball_instructions := false
+@onready var popup_rect = %ColorRect
 @onready var popup = %PopupInstructions
+@onready var popup_timer = %InstructionTimer
 
 func _ready():
 	prop.body_entered.connect(_on_body_entered)
@@ -45,6 +47,9 @@ func pick_up(prop_interact: Prop_Interact):
 		popup.text = """We could walk up to the light switch and turn it off..
 		Or we could aim at it, lock on with 'RMB'
 		and throw with 'LMB'"""
+		popup.visible = true
+		popup_rect.visible = true
+		popup_timer.start()
 
 func throw(prop_interact):
 	prop.freeze = true

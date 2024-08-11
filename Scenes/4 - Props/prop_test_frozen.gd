@@ -9,7 +9,9 @@ extends Node
 # First time picking up bedroom door to trigger instructios
 @onready var bedroom_door_instructions := false
 @onready var bedroom_door_thrown := false
+@onready var popup_rect = %ColorRect
 @onready var popup = %PopupInstructions
+@onready var popup_timer = %InstructionTimer
 
 
 func _ready():
@@ -30,6 +32,9 @@ func pick_up(prop_interact: Prop_Interact):
 		bedroom_door_instructions = true
 		popup.text = """Oh, okay... We should hide that in our room
 		At least put it down gently. Press 'LMB' """
+		popup.visible = true
+		popup_rect.visible = true
+		popup_timer.start()
 
 func throw(prop_interact):
 	prop.freeze = true
@@ -42,6 +47,9 @@ func throw(prop_interact):
 		bedroom_door_thrown = true
 		popup.text = """Might aswell start throwing everything, why don't you?
 		Pick up that basketball outside your room"""
+		popup.visible = true
+		popup_rect.visible = true
+		popup_timer.start()
 
 func _on_body_entered(body):
 	print(body)

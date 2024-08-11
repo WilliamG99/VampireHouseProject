@@ -109,6 +109,7 @@ func _on_game_won_body_entered(body):
 func _on_bedroom_door_trigger_body_entered(body):
 	popup.text = """Press 'E' to interact with objects
 	Open the door quietly! You don't want to alert Frank..."""
+	%InstructionTimer.start()
 	
 func _on_instruction_timer_timeout():
 	popup.visible = false
