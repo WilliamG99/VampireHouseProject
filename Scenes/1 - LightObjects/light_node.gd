@@ -13,11 +13,8 @@ var first_light_off_instructions : bool
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
 @export_range(0.0, 1.0, 0.01) var opacity: float = 0.1
 
-var light_set_once : bool
-
 func _ready():
 	first_light_off_instructions = false
-	light_set_once = false
 	if light_switch:
 		switch_sound.position = light_switch.position
 
@@ -34,9 +31,8 @@ func get_opacity() -> float:
 	return opacity
 
 func turn_on_lights() -> void:
-	if !has_node("LightSource") and !light_set_once:
+	if !has_node("LightSource"):
 		add_child(light_source)
-		light_set_once = true
 
 func _on_light_switch_body_entered(body : RigidBody3D):
 	if body.has_method("get_desired_light_state"):

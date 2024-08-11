@@ -72,11 +72,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		holding_prop = true
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "true")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "true")
-		
-		if !prop_nodes.front():
-			return
-		else:
-			prop_node = prop_nodes.front()
+		prop_node = prop_nodes.front()
 	
 	# Trigger snack event and wakes frank
 	if in_snack_area and Input.is_action_just_pressed("interact"):
@@ -95,6 +91,11 @@ func get_desired_light_state() -> bool:
 
 
 func _physics_process(delta) -> void:
+	print(near_prop, " Near Prop")
+	print(holding_prop, " Holding Prop")
+	print(prop_nodes)
+	print(prop_node)
+	
 	# Player Movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -187,13 +188,12 @@ func _on_prop_interact_area_body_exited(body) -> void:
 	elif body.has_method("pick_up")  or body.get_parent().has_method("pick_up") or body.get_parent().get_parent().has_method("pick_up"):
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "false")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "false")
+		prop_nodes.erase(body)
 		
 		if prop_nodes.is_empty():
 			near_prop = false
 			holding_prop = false
-		else:
-			prop_nodes.erase(body)
-		print(prop_nodes)
+			prop_node = []
 
 
 func game_over():

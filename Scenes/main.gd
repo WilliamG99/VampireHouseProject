@@ -19,6 +19,8 @@ var is_chasing = false
 
 # Fridge snack event area
 var snacks_area := false
+# Light trigger event once
+var lights_area := false
 
 func _ready():
 	remove_child(game_won_area)
@@ -77,15 +79,21 @@ func _on_snack_frank_trigger_body_entered(body):
 		print("Entered snack area")
 		snacks_area = true
 		player._set_in_snack_area(snacks_area)
+		popup.text = "Press 'E' for snacks"
+		popup.visible = true
+		popup_rect.visible = true
 
 func _on_snack_frank_trigger_body_exited(body):
 	if body.name == "Player" and snacks_area:
 		print("Left snack area")
 		snacks_area = false
 		player._set_in_snack_area(snacks_area)
+		popup.visible = false
+		popup_rect.visible = false
 
 func _on_frank_trigger_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and !lights_area:
+		lights_area = true
 		$Enemy.set_frank_awake()
 		get_tree().call_group("Lights", "turn_on_lights")
 
