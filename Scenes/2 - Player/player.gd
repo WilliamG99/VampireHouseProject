@@ -7,6 +7,10 @@ extends RigidBody3D
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
 @onready var raycast = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 @onready var anim_tree = $VampireKid/AnimationTree
+@onready var game_won_area = $".."/GameWon
+@onready var popup = %PopupInstructions
+@onready var popup_timer = %InstructionTimer
+@onready var popup_rect = %ColorRect
 
 
 # Get audio references
@@ -37,10 +41,15 @@ var prop_node : RigidBody3D
 var aim_dir : Vector3
 
 var lock_on_node
-var locking_on = false
+var locking_on := false
+
+var in_snack_area := false
 
 var prop_interact = Prop_Interact.new()
 
+
+func _set_in_snack_area(player_snack_area : bool):
+	in_snack_area = player_snack_area
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -62,7 +71,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		holding_prop = true
 		anim_tree.set("parameters/isHoldingRunning/transition_request", "true")
 		anim_tree.set("parameters/isHoldingIdle/transition_request", "true")
-
+	
+	# Trigger snack event and wakes frank
+	if in_snack_area and Input.is_action_just_pressed("interact"):
+		$"../Enemy".set_frank_awake()
+		get_tree().call_group("Lights", "turn_on_lights")
+		$"..".add_child(game_won_area)
+		
+		# Trigger pop instructions
+		popup.text = """ Snacks obtained...
+		But Frank heard you!
+		Get back to bed before you're caught!!!"""
+		popup.visible = true
+		popup_rect.visible = true
+		popup_timer.start()
 
 func get_desired_light_state() -> bool:
 	return DESIRED_LIGHT_STATE

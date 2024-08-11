@@ -4,6 +4,10 @@ extends Node3D
 @onready var switch_sound = $SwitchSound
 @onready var light_switch = $LightSwitch
 
+@onready var first_light_off_instructions := false
+@onready var popup = %PopupInstructions
+@onready var popup_timer = %InstructionTimer
+
 @export var length: float = 13
 @export var angle: float = 25
 @export_range(0.0, 1.0, 0.01) var falloff: float = 1.0
@@ -46,6 +50,13 @@ func _on_light_switch_body_entered(body : RigidBody3D):
 		if has_node("LightSource"):
 			switch_sound.play()
 			remove_child(light_source)
+			
+			if !first_light_off_instructions:
+				first_light_off_instructions = true
+				popup.text = """ Nice one! 
+				Snacks are in the fridge
+				And be careful not to alert Frank..."""
+				popup_timer.start()
 			
 		elif !has_node("LightSource"):
 			switch_sound.play()

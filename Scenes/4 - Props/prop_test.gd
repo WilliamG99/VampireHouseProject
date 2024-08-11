@@ -10,6 +10,10 @@ extends Node
 @onready var timer = $Timer
 var play_sound = false
 
+# First time picking up basketball to trigger instructios
+@onready var basketball_instructions := false
+@onready var popup = %PopupInstructions
+
 func _ready():
 	prop.body_entered.connect(_on_body_entered)
 	prop.continuous_cd = true
@@ -28,6 +32,12 @@ func pick_up(prop_interact: Prop_Interact):
 	$".".global_rotation_degrees = Vector3(0, prop_interact.prop_rotation_degrees_y, 0)
 	prop.global_position = prop_interact.prop_position
 	prop.collision_mask = 13
+	
+	if !basketball_instructions and $".".name == "Basketball":
+		basketball_instructions = true
+		popup.text = """We could walk up to the light switch and turn it off..
+		Or we could aim at it, lock on with 'RMB'
+		and throw with 'LMB'"""
 
 func throw(prop_interact):
 	prop.freeze = true
