@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc3vl3m5730ra"]
+[gd_scene load_steps=7 format=3 uid="uid://dc3vl3m5730ra"]
 
 [ext_resource type="Theme" uid="uid://brnraesdacowk" path="res://Assets/Themes/default_theme.tres" id="1_v0jkh"]
 [ext_resource type="FontFile" uid="uid://cl7cbmljl0hax" path="res://Assets/Fonts/bloodcrow.ttf" id="2_cr0rg"]
 [ext_resource type="Script" path="res://Scenes/7 - Menu/Scripts/game_won.gd" id="2_gunus"]
 [ext_resource type="AudioStream" uid="uid://dlsn6v0pyvx3x" path="res://Assets/Audio/SFX/Menu/MenuClick.mp3" id="3_jc8qe"]
 [ext_resource type="AudioStream" uid="uid://cmx61yodif4s3" path="res://Assets/Audio/SFX/Menu/MenuSelect.mp3" id="4_1wpfe"]
+[ext_resource type="AudioStream" uid="uid://cfkg8ipvdj88l" path="res://Assets/Audio/Music/victory.mp3" id="6_xfk63"]
 
 [node name="GameWon" type="Control"]
 layout_mode = 3
@@ -108,6 +109,10 @@ stream = ExtResource("4_1wpfe")
 volume_db = -11.9
 pitch_scale = 1.32
 bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_xfk63")
+autoplay = true
 
 [connection signal="mouse_entered" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonReturn" to="." method="_on_button_return_mouse_entered"]
 [connection signal="pressed" from="Padding/VerticalAllignment/HorizontalAlligment/VerticalAllignment/ButtonReturn" to="." method="_on_button_return_pressed"]

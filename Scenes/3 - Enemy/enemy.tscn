@@ -36,6 +36,7 @@ transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="EnemyHand" type="MeshInstance3D" parent="frankenstein"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.5, -2.72649)
+visible = false
 mesh = SubResource("SphereMesh_o1nge")
 skeleton = NodePath("../..")
 
