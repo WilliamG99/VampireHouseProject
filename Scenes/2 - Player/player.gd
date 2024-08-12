@@ -82,6 +82,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		$"../Enemy".set_frank_awake()
 		get_tree().call_group("Lights", "turn_on_lights")
 		$"..".add_child(game_won_area)
+		$"..".remove_child($"../FrankTrigger2")
+		$"..".remove_child($"../FrankTrigger3")
+		$"..".remove_child($"../FrankTrigger4")
 		
 		# Trigger pop instructions
 		popup.text = " RUN!!! "
@@ -94,11 +97,6 @@ func get_desired_light_state() -> bool:
 
 
 func _physics_process(delta) -> void:
-	print(near_prop, " Near Prop")
-	print(holding_prop, " Holding Prop")
-	print(prop_nodes)
-	print(prop_node)
-	
 	# Player Movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
